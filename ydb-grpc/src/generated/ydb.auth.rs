@@ -1,4 +1,5 @@
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LoginRequest {
     #[prost(message, optional, tag = "1")]
@@ -9,6 +10,7 @@ pub struct LoginRequest {
     pub password: ::prost::alloc::string::String,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LoginResponse {
     /// After successfull completion must contain LoginResult.
@@ -16,6 +18,7 @@ pub struct LoginResponse {
     pub operation: ::core::option::Option<super::operations::Operation>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LoginResult {
     #[prost(string, tag = "1")]

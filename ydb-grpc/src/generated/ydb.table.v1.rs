@@ -77,9 +77,9 @@ pub mod table_service_client {
             &mut self,
             request: impl tonic::IntoRequest<super::super::CreateSessionRequest>,
         ) -> Result<
-                tonic::Response<super::super::CreateSessionResponse>,
-                tonic::Status,
-            > {
+            tonic::Response<super::super::CreateSessionResponse>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await
@@ -100,9 +100,9 @@ pub mod table_service_client {
             &mut self,
             request: impl tonic::IntoRequest<super::super::DeleteSessionRequest>,
         ) -> Result<
-                tonic::Response<super::super::DeleteSessionResponse>,
-                tonic::Status,
-            > {
+            tonic::Response<super::super::DeleteSessionResponse>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await
@@ -263,9 +263,9 @@ pub mod table_service_client {
             &mut self,
             request: impl tonic::IntoRequest<super::super::DescribeTableRequest>,
         ) -> Result<
-                tonic::Response<super::super::DescribeTableResponse>,
-                tonic::Status,
-            > {
+            tonic::Response<super::super::DescribeTableResponse>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await
@@ -287,9 +287,9 @@ pub mod table_service_client {
             &mut self,
             request: impl tonic::IntoRequest<super::super::ExplainDataQueryRequest>,
         ) -> Result<
-                tonic::Response<super::super::ExplainDataQueryResponse>,
-                tonic::Status,
-            > {
+            tonic::Response<super::super::ExplainDataQueryResponse>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await
@@ -311,9 +311,9 @@ pub mod table_service_client {
             &mut self,
             request: impl tonic::IntoRequest<super::super::PrepareDataQueryRequest>,
         ) -> Result<
-                tonic::Response<super::super::PrepareDataQueryResponse>,
-                tonic::Status,
-            > {
+            tonic::Response<super::super::PrepareDataQueryResponse>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await
@@ -335,9 +335,9 @@ pub mod table_service_client {
             &mut self,
             request: impl tonic::IntoRequest<super::super::ExecuteDataQueryRequest>,
         ) -> Result<
-                tonic::Response<super::super::ExecuteDataQueryResponse>,
-                tonic::Status,
-            > {
+            tonic::Response<super::super::ExecuteDataQueryResponse>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await
@@ -359,9 +359,9 @@ pub mod table_service_client {
             &mut self,
             request: impl tonic::IntoRequest<super::super::ExecuteSchemeQueryRequest>,
         ) -> Result<
-                tonic::Response<super::super::ExecuteSchemeQueryResponse>,
-                tonic::Status,
-            > {
+            tonic::Response<super::super::ExecuteSchemeQueryResponse>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await
@@ -382,9 +382,9 @@ pub mod table_service_client {
             &mut self,
             request: impl tonic::IntoRequest<super::super::BeginTransactionRequest>,
         ) -> Result<
-                tonic::Response<super::super::BeginTransactionResponse>,
-                tonic::Status,
-            > {
+            tonic::Response<super::super::BeginTransactionResponse>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await
@@ -405,9 +405,9 @@ pub mod table_service_client {
             &mut self,
             request: impl tonic::IntoRequest<super::super::CommitTransactionRequest>,
         ) -> Result<
-                tonic::Response<super::super::CommitTransactionResponse>,
-                tonic::Status,
-            > {
+            tonic::Response<super::super::CommitTransactionResponse>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await
@@ -428,9 +428,9 @@ pub mod table_service_client {
             &mut self,
             request: impl tonic::IntoRequest<super::super::RollbackTransactionRequest>,
         ) -> Result<
-                tonic::Response<super::super::RollbackTransactionResponse>,
-                tonic::Status,
-            > {
+            tonic::Response<super::super::RollbackTransactionResponse>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await
@@ -451,9 +451,9 @@ pub mod table_service_client {
             &mut self,
             request: impl tonic::IntoRequest<super::super::DescribeTableOptionsRequest>,
         ) -> Result<
-                tonic::Response<super::super::DescribeTableOptionsResponse>,
-                tonic::Status,
-            > {
+            tonic::Response<super::super::DescribeTableOptionsResponse>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await
@@ -474,11 +474,9 @@ pub mod table_service_client {
             &mut self,
             request: impl tonic::IntoRequest<super::super::ReadTableRequest>,
         ) -> Result<
-                tonic::Response<
-                    tonic::codec::Streaming<super::super::ReadTableResponse>,
-                >,
-                tonic::Status,
-            > {
+            tonic::Response<tonic::codec::Streaming<super::super::ReadTableResponse>>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await
@@ -541,13 +539,11 @@ pub mod table_service_client {
             &mut self,
             request: impl tonic::IntoRequest<super::super::ExecuteScanQueryRequest>,
         ) -> Result<
-                tonic::Response<
-                    tonic::codec::Streaming<
-                        super::super::ExecuteScanQueryPartialResponse,
-                    >,
-                >,
-                tonic::Status,
-            > {
+            tonic::Response<
+                tonic::codec::Streaming<super::super::ExecuteScanQueryPartialResponse>,
+            >,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await

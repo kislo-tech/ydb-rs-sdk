@@ -1,5 +1,6 @@
 /// Describes select, update (insert, upsert, replace) and delete operations
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct OperationStats {
     #[prost(uint64, tag = "1")]
@@ -9,6 +10,7 @@ pub struct OperationStats {
 }
 /// Describes all operations on a table
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TableAccessStats {
     #[prost(string, tag = "1")]
@@ -23,6 +25,7 @@ pub struct TableAccessStats {
     pub partitions_count: u64,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct QueryPhaseStats {
     #[prost(uint64, tag = "1")]
@@ -37,6 +40,7 @@ pub struct QueryPhaseStats {
     pub literal_phase: bool,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CompilationStats {
     #[prost(bool, tag = "1")]
@@ -47,6 +51,7 @@ pub struct CompilationStats {
     pub cpu_time_us: u64,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct QueryStats {
     /// A query might have one or more execution phases

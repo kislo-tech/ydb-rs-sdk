@@ -91,13 +91,11 @@ pub mod topic_service_client {
                 Message = super::super::stream_write_message::FromClient,
             >,
         ) -> Result<
-                tonic::Response<
-                    tonic::codec::Streaming<
-                        super::super::stream_write_message::FromServer,
-                    >,
-                >,
-                tonic::Status,
-            > {
+            tonic::Response<
+                tonic::codec::Streaming<super::super::stream_write_message::FromServer>,
+            >,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await
@@ -152,13 +150,11 @@ pub mod topic_service_client {
                 Message = super::super::stream_read_message::FromClient,
             >,
         ) -> Result<
-                tonic::Response<
-                    tonic::codec::Streaming<
-                        super::super::stream_read_message::FromServer,
-                    >,
-                >,
-                tonic::Status,
-            > {
+            tonic::Response<
+                tonic::codec::Streaming<super::super::stream_read_message::FromServer>,
+            >,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await
@@ -201,9 +197,9 @@ pub mod topic_service_client {
                 super::super::UpdateOffsetsInTransactionRequest,
             >,
         ) -> Result<
-                tonic::Response<super::super::UpdateOffsetsInTransactionResponse>,
-                tonic::Status,
-            > {
+            tonic::Response<super::super::UpdateOffsetsInTransactionResponse>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await
@@ -244,9 +240,9 @@ pub mod topic_service_client {
             &mut self,
             request: impl tonic::IntoRequest<super::super::DescribeTopicRequest>,
         ) -> Result<
-                tonic::Response<super::super::DescribeTopicResponse>,
-                tonic::Status,
-            > {
+            tonic::Response<super::super::DescribeTopicResponse>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await
@@ -267,9 +263,9 @@ pub mod topic_service_client {
             &mut self,
             request: impl tonic::IntoRequest<super::super::DescribeConsumerRequest>,
         ) -> Result<
-                tonic::Response<super::super::DescribeConsumerResponse>,
-                tonic::Status,
-            > {
+            tonic::Response<super::super::DescribeConsumerResponse>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await

@@ -1,5 +1,6 @@
 /// Create new session
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateSessionRequest {
     #[prost(message, optional, tag = "1")]
@@ -7,6 +8,7 @@ pub struct CreateSessionRequest {
 }
 /// Create new session
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateSessionResponse {
     /// Holds CreateSessionResult in case of CreateSessionResult
@@ -14,6 +16,7 @@ pub struct CreateSessionResponse {
     pub operation: ::core::option::Option<super::operations::Operation>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateSessionResult {
     /// Session identifier
@@ -22,6 +25,7 @@ pub struct CreateSessionResult {
 }
 /// Delete session with given id string
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteSessionRequest {
     /// Session identifier
@@ -31,22 +35,27 @@ pub struct DeleteSessionRequest {
     pub operation_params: ::core::option::Option<super::operations::OperationParams>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteSessionResponse {
     #[prost(message, optional, tag = "1")]
     pub operation: ::core::option::Option<super::operations::Operation>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GlobalIndex {}
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GlobalAsyncIndex {}
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GlobalUniqueIndex {}
 /// Represent secondary index
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TableIndex {
     /// Name of index
@@ -66,6 +75,7 @@ pub struct TableIndex {
 pub mod table_index {
     /// Type of index
     #[derive(serde::Serialize, serde::Deserialize)]
+    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Type {
         #[prost(message, tag = "3")]
@@ -78,6 +88,7 @@ pub mod table_index {
 }
 /// Represent secondary index with index state
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TableIndexDescription {
     /// Name of index
@@ -131,9 +142,19 @@ pub mod table_index_description {
                 Status::Building => "STATUS_BUILDING",
             }
         }
+        /// Creates an enum from field names used in the ProtoBuf definition.
+        pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+            match value {
+                "STATUS_UNSPECIFIED" => Some(Self::Unspecified),
+                "STATUS_READY" => Some(Self::Ready),
+                "STATUS_BUILDING" => Some(Self::Building),
+                _ => None,
+            }
+        }
     }
     /// Type of index
     #[derive(serde::Serialize, serde::Deserialize)]
+    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Type {
         #[prost(message, tag = "3")]
@@ -146,6 +167,7 @@ pub mod table_index_description {
 }
 /// State of index building operation
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct IndexBuildState {}
 /// Nested message and enum types in `IndexBuildState`.
@@ -191,10 +213,26 @@ pub mod index_build_state {
                 State::Rejected => "STATE_REJECTED",
             }
         }
+        /// Creates an enum from field names used in the ProtoBuf definition.
+        pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+            match value {
+                "STATE_UNSPECIFIED" => Some(Self::Unspecified),
+                "STATE_PREPARING" => Some(Self::Preparing),
+                "STATE_TRANSFERING_DATA" => Some(Self::TransferingData),
+                "STATE_APPLYING" => Some(Self::Applying),
+                "STATE_DONE" => Some(Self::Done),
+                "STATE_CANCELLATION" => Some(Self::Cancellation),
+                "STATE_CANCELLED" => Some(Self::Cancelled),
+                "STATE_REJECTION" => Some(Self::Rejection),
+                "STATE_REJECTED" => Some(Self::Rejected),
+                _ => None,
+            }
+        }
     }
 }
 /// Description of index building operation
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct IndexBuildDescription {
     #[prost(string, tag = "1")]
@@ -203,6 +241,7 @@ pub struct IndexBuildDescription {
     pub index: ::core::option::Option<TableIndex>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct IndexBuildMetadata {
     #[prost(message, optional, tag = "1")]
@@ -213,6 +252,7 @@ pub struct IndexBuildMetadata {
     pub progress: f32,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ChangefeedMode {}
 /// Nested message and enum types in `ChangefeedMode`.
@@ -257,9 +297,22 @@ pub mod changefeed_mode {
                 Mode::NewAndOldImages => "MODE_NEW_AND_OLD_IMAGES",
             }
         }
+        /// Creates an enum from field names used in the ProtoBuf definition.
+        pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+            match value {
+                "MODE_UNSPECIFIED" => Some(Self::Unspecified),
+                "MODE_KEYS_ONLY" => Some(Self::KeysOnly),
+                "MODE_UPDATES" => Some(Self::Updates),
+                "MODE_NEW_IMAGE" => Some(Self::NewImage),
+                "MODE_OLD_IMAGE" => Some(Self::OldImage),
+                "MODE_NEW_AND_OLD_IMAGES" => Some(Self::NewAndOldImages),
+                _ => None,
+            }
+        }
     }
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ChangefeedFormat {}
 /// Nested message and enum types in `ChangefeedFormat`.
@@ -298,9 +351,20 @@ pub mod changefeed_format {
                 Format::DebeziumJson => "FORMAT_DEBEZIUM_JSON",
             }
         }
+        /// Creates an enum from field names used in the ProtoBuf definition.
+        pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+            match value {
+                "FORMAT_UNSPECIFIED" => Some(Self::Unspecified),
+                "FORMAT_JSON" => Some(Self::Json),
+                "FORMAT_DYNAMODB_STREAMS_JSON" => Some(Self::DynamodbStreamsJson),
+                "FORMAT_DEBEZIUM_JSON" => Some(Self::DebeziumJson),
+                _ => None,
+            }
+        }
     }
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Changefeed {
     /// Name of the feed
@@ -344,6 +408,7 @@ pub struct Changefeed {
     >,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ChangefeedDescription {
     /// Name of the feed
@@ -414,15 +479,27 @@ pub mod changefeed_description {
                 State::InitialScan => "STATE_INITIAL_SCAN",
             }
         }
+        /// Creates an enum from field names used in the ProtoBuf definition.
+        pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+            match value {
+                "STATE_UNSPECIFIED" => Some(Self::Unspecified),
+                "STATE_ENABLED" => Some(Self::Enabled),
+                "STATE_DISABLED" => Some(Self::Disabled),
+                "STATE_INITIAL_SCAN" => Some(Self::InitialScan),
+                _ => None,
+            }
+        }
     }
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StoragePool {
     #[prost(string, tag = "1")]
     pub media: ::prost::alloc::string::String,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StoragePolicy {
     #[prost(string, tag = "1")]
@@ -441,6 +518,7 @@ pub struct StoragePolicy {
     pub column_families: ::prost::alloc::vec::Vec<ColumnFamilyPolicy>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ColumnFamilyPolicy {
     /// Name of the column family, the name "default" must be used for the
@@ -491,15 +569,26 @@ pub mod column_family_policy {
                 Compression::Compressed => "COMPRESSED",
             }
         }
+        /// Creates an enum from field names used in the ProtoBuf definition.
+        pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+            match value {
+                "COMPRESSION_UNSPECIFIED" => Some(Self::Unspecified),
+                "UNCOMPRESSED" => Some(Self::Uncompressed),
+                "COMPRESSED" => Some(Self::Compressed),
+                _ => None,
+            }
+        }
     }
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CompactionPolicy {
     #[prost(string, tag = "1")]
     pub preset_name: ::prost::alloc::string::String,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ExplicitPartitions {
     /// Specify key values used to split table into partitions.
@@ -511,6 +600,7 @@ pub struct ExplicitPartitions {
     pub split_points: ::prost::alloc::vec::Vec<super::TypedValue>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PartitionStats {
     /// Approximate number of rows in shard
@@ -519,8 +609,12 @@ pub struct PartitionStats {
     /// Approximate size of shard (bytes)
     #[prost(uint64, tag = "2")]
     pub store_size: u64,
+    /// id of node that serve shard key range
+    #[prost(uint32, tag = "3")]
+    pub leader_node_id: u32,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TableStats {
     /// Stats for each partition
@@ -545,6 +639,7 @@ pub struct TableStats {
     >,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PartitioningPolicy {
     #[prost(string, tag = "1")]
@@ -589,8 +684,19 @@ pub mod partitioning_policy {
                 AutoPartitioningPolicy::AutoSplitMerge => "AUTO_SPLIT_MERGE",
             }
         }
+        /// Creates an enum from field names used in the ProtoBuf definition.
+        pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+            match value {
+                "AUTO_PARTITIONING_POLICY_UNSPECIFIED" => Some(Self::Unspecified),
+                "DISABLED" => Some(Self::Disabled),
+                "AUTO_SPLIT" => Some(Self::AutoSplit),
+                "AUTO_SPLIT_MERGE" => Some(Self::AutoSplitMerge),
+                _ => None,
+            }
+        }
     }
     #[derive(serde::Serialize, serde::Deserialize)]
+    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Partitions {
         /// Allows to enable uniform sharding using given shards number.
@@ -604,12 +710,14 @@ pub mod partitioning_policy {
     }
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ExecutionPolicy {
     #[prost(string, tag = "1")]
     pub preset_name: ::prost::alloc::string::String,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ReplicationPolicy {
     #[prost(string, tag = "1")]
@@ -629,12 +737,14 @@ pub struct ReplicationPolicy {
     pub allow_promotion: i32,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CachingPolicy {
     #[prost(string, tag = "1")]
     pub preset_name: ::prost::alloc::string::String,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TableProfile {
     #[prost(string, tag = "1")]
@@ -653,6 +763,7 @@ pub struct TableProfile {
     pub caching_policy: ::core::option::Option<CachingPolicy>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SequenceDescription {
     /// mandatorys
@@ -683,6 +794,7 @@ pub struct SequenceDescription {
 /// Nested message and enum types in `SequenceDescription`.
 pub mod sequence_description {
     #[derive(serde::Serialize, serde::Deserialize)]
+    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct SetVal {
         #[prost(sint64, optional, tag = "1")]
@@ -692,6 +804,7 @@ pub mod sequence_description {
     }
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ColumnMeta {
     /// Name of column
@@ -714,6 +827,7 @@ pub struct ColumnMeta {
 pub mod column_meta {
     /// Column default value option
     #[derive(serde::Serialize, serde::Deserialize)]
+    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum DefaultValue {
         #[prost(message, tag = "5")]
@@ -727,6 +841,7 @@ pub mod column_meta {
 /// time format), and <expire_after_seconds> has passed since that moment;
 /// i.e. the expiration threshold is the value of <column_name> plus <expire_after_seconds>.
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DateTypeColumnModeSettings {
     /// The column type must be a date type
@@ -738,6 +853,7 @@ pub struct DateTypeColumnModeSettings {
 /// Same as DateTypeColumnModeSettings (above), but useful when type of the
 /// value stored in <column_name> is not a date type.
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ValueSinceUnixEpochModeSettings {
     /// The column type must be one of:
@@ -789,9 +905,21 @@ pub mod value_since_unix_epoch_mode_settings {
                 Unit::Nanoseconds => "UNIT_NANOSECONDS",
             }
         }
+        /// Creates an enum from field names used in the ProtoBuf definition.
+        pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+            match value {
+                "UNIT_UNSPECIFIED" => Some(Self::Unspecified),
+                "UNIT_SECONDS" => Some(Self::Seconds),
+                "UNIT_MILLISECONDS" => Some(Self::Milliseconds),
+                "UNIT_MICROSECONDS" => Some(Self::Microseconds),
+                "UNIT_NANOSECONDS" => Some(Self::Nanoseconds),
+                _ => None,
+            }
+        }
     }
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TtlSettings {
     /// How often to run BRO on the same partition.
@@ -804,6 +932,7 @@ pub struct TtlSettings {
 /// Nested message and enum types in `TtlSettings`.
 pub mod ttl_settings {
     #[derive(serde::Serialize, serde::Deserialize)]
+    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Mode {
         #[prost(message, tag = "1")]
@@ -813,6 +942,7 @@ pub mod ttl_settings {
     }
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StorageSettings {
     /// This specifies internal channel 0 commit log storage pool
@@ -836,6 +966,7 @@ pub struct StorageSettings {
     pub store_external_blobs: i32,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ColumnFamily {
     /// Name of the column family, the name "default" must be used for the
@@ -884,9 +1015,19 @@ pub mod column_family {
                 Compression::Lz4 => "COMPRESSION_LZ4",
             }
         }
+        /// Creates an enum from field names used in the ProtoBuf definition.
+        pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+            match value {
+                "COMPRESSION_UNSPECIFIED" => Some(Self::Unspecified),
+                "COMPRESSION_NONE" => Some(Self::None),
+                "COMPRESSION_LZ4" => Some(Self::Lz4),
+                _ => None,
+            }
+        }
     }
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PartitioningSettings {
     /// List of columns to partition by
@@ -909,6 +1050,7 @@ pub struct PartitioningSettings {
     pub max_partitions_count: u64,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AzReadReplicasSettings {
     /// AZ name
@@ -919,6 +1061,7 @@ pub struct AzReadReplicasSettings {
     pub read_replicas_count: u64,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ClusterReplicasSettings {
     /// List of read replicas settings for each AZ
@@ -926,6 +1069,7 @@ pub struct ClusterReplicasSettings {
     pub az_read_replicas_settings: ::prost::alloc::vec::Vec<AzReadReplicasSettings>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ReadReplicasSettings {
     #[prost(oneof = "read_replicas_settings::Settings", tags = "1, 2")]
@@ -934,6 +1078,7 @@ pub struct ReadReplicasSettings {
 /// Nested message and enum types in `ReadReplicasSettings`.
 pub mod read_replicas_settings {
     #[derive(serde::Serialize, serde::Deserialize)]
+    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Settings {
         /// Set equal read replicas count for every AZ
@@ -945,6 +1090,7 @@ pub mod read_replicas_settings {
     }
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateTableRequest {
     /// Session identifier
@@ -1011,6 +1157,7 @@ pub struct CreateTableRequest {
 pub mod create_table_request {
     /// Either one of the following partitions options can be specified
     #[derive(serde::Serialize, serde::Deserialize)]
+    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Partitions {
         /// Enable uniform partitioning using given partitions count.
@@ -1023,6 +1170,7 @@ pub mod create_table_request {
     }
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateTableResponse {
     #[prost(message, optional, tag = "1")]
@@ -1030,6 +1178,7 @@ pub struct CreateTableResponse {
 }
 /// Drop table with given path
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DropTableRequest {
     /// Session identifier
@@ -1042,12 +1191,14 @@ pub struct DropTableRequest {
     pub operation_params: ::core::option::Option<super::operations::OperationParams>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DropTableResponse {
     #[prost(message, optional, tag = "1")]
     pub operation: ::core::option::Option<super::operations::Operation>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RenameIndexItem {
     /// Index name to rename
@@ -1062,6 +1213,7 @@ pub struct RenameIndexItem {
 }
 /// Alter table with given path
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AlterTableRequest {
     /// Session identifier
@@ -1135,6 +1287,7 @@ pub struct AlterTableRequest {
 pub mod alter_table_request {
     /// Setup or remove time to live settings
     #[derive(serde::Serialize, serde::Deserialize)]
+    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum TtlAction {
         #[prost(message, tag = "7")]
@@ -1144,6 +1297,7 @@ pub mod alter_table_request {
     }
     /// Setup or remove tiering
     #[derive(serde::Serialize, serde::Deserialize)]
+    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum TieringAction {
         #[prost(string, tag = "22")]
@@ -1153,6 +1307,7 @@ pub mod alter_table_request {
     }
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AlterTableResponse {
     #[prost(message, optional, tag = "1")]
@@ -1160,6 +1315,7 @@ pub struct AlterTableResponse {
 }
 /// Copy table with given path
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CopyTableRequest {
     /// Session identifier
@@ -1175,12 +1331,14 @@ pub struct CopyTableRequest {
     pub operation_params: ::core::option::Option<super::operations::OperationParams>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CopyTableResponse {
     #[prost(message, optional, tag = "1")]
     pub operation: ::core::option::Option<super::operations::Operation>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CopyTableItem {
     /// Copy from path
@@ -1195,6 +1353,7 @@ pub struct CopyTableItem {
 }
 /// Creates consistent copy of given tables.
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CopyTablesRequest {
     #[prost(message, optional, tag = "1")]
@@ -1207,12 +1366,14 @@ pub struct CopyTablesRequest {
     pub tables: ::prost::alloc::vec::Vec<CopyTableItem>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CopyTablesResponse {
     #[prost(message, optional, tag = "1")]
     pub operation: ::core::option::Option<super::operations::Operation>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RenameTableItem {
     /// Full path
@@ -1227,6 +1388,7 @@ pub struct RenameTableItem {
 }
 /// Moves given tables
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RenameTablesRequest {
     #[prost(message, optional, tag = "1")]
@@ -1239,6 +1401,7 @@ pub struct RenameTablesRequest {
     pub tables: ::prost::alloc::vec::Vec<RenameTableItem>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RenameTablesResponse {
     #[prost(message, optional, tag = "1")]
@@ -1246,6 +1409,7 @@ pub struct RenameTablesResponse {
 }
 /// Describe table with given path
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DescribeTableRequest {
     /// Session identifier
@@ -1265,8 +1429,12 @@ pub struct DescribeTableRequest {
     /// Includes partition statistics (required include_table_statistics)
     #[prost(bool, tag = "7")]
     pub include_partition_stats: bool,
+    /// Includes shard -> node id maping (required include_partition_stats)
+    #[prost(bool, tag = "9")]
+    pub include_shard_nodes_info: bool,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DescribeTableResponse {
     /// Holds DescribeTableResult in case of successful call
@@ -1274,6 +1442,7 @@ pub struct DescribeTableResponse {
     pub operation: ::core::option::Option<super::operations::Operation>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DescribeTableResult {
     /// Description of scheme object
@@ -1332,6 +1501,7 @@ pub struct DescribeTableResult {
     pub store_type: i32,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Query {
     /// Text of query or id prepared query
@@ -1342,6 +1512,7 @@ pub struct Query {
 pub mod query {
     /// Text of query or id prepared query
     #[derive(serde::Serialize, serde::Deserialize)]
+    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Query {
         /// SQL program
@@ -1353,21 +1524,26 @@ pub mod query {
     }
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SerializableModeSettings {}
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct OnlineModeSettings {
     #[prost(bool, tag = "1")]
     pub allow_inconsistent_reads: bool,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StaleModeSettings {}
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SnapshotModeSettings {}
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TransactionSettings {
     #[prost(oneof = "transaction_settings::TxMode", tags = "1, 2, 3, 4")]
@@ -1376,6 +1552,7 @@ pub struct TransactionSettings {
 /// Nested message and enum types in `TransactionSettings`.
 pub mod transaction_settings {
     #[derive(serde::Serialize, serde::Deserialize)]
+    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum TxMode {
         #[prost(message, tag = "1")]
@@ -1389,6 +1566,7 @@ pub mod transaction_settings {
     }
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TransactionControl {
     #[prost(bool, tag = "10")]
@@ -1399,6 +1577,7 @@ pub struct TransactionControl {
 /// Nested message and enum types in `TransactionControl`.
 pub mod transaction_control {
     #[derive(serde::Serialize, serde::Deserialize)]
+    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum TxSelector {
         #[prost(string, tag = "1")]
@@ -1408,6 +1587,7 @@ pub mod transaction_control {
     }
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct QueryCachePolicy {
     #[prost(bool, tag = "1")]
@@ -1415,6 +1595,7 @@ pub struct QueryCachePolicy {
 }
 /// Collect and return query execution stats
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct QueryStatsCollection {}
 /// Nested message and enum types in `QueryStatsCollection`.
@@ -1456,9 +1637,21 @@ pub mod query_stats_collection {
                 Mode::StatsCollectionProfile => "STATS_COLLECTION_PROFILE",
             }
         }
+        /// Creates an enum from field names used in the ProtoBuf definition.
+        pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+            match value {
+                "STATS_COLLECTION_UNSPECIFIED" => Some(Self::StatsCollectionUnspecified),
+                "STATS_COLLECTION_NONE" => Some(Self::StatsCollectionNone),
+                "STATS_COLLECTION_BASIC" => Some(Self::StatsCollectionBasic),
+                "STATS_COLLECTION_FULL" => Some(Self::StatsCollectionFull),
+                "STATS_COLLECTION_PROFILE" => Some(Self::StatsCollectionProfile),
+                _ => None,
+            }
+        }
     }
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ExecuteDataQueryRequest {
     /// Session identifier
@@ -1482,12 +1675,14 @@ pub struct ExecuteDataQueryRequest {
     pub collect_stats: i32,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ExecuteDataQueryResponse {
     #[prost(message, optional, tag = "1")]
     pub operation: ::core::option::Option<super::operations::Operation>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ExecuteSchemeQueryRequest {
     /// Session identifier
@@ -1500,6 +1695,7 @@ pub struct ExecuteSchemeQueryRequest {
     pub operation_params: ::core::option::Option<super::operations::OperationParams>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ExecuteSchemeQueryResponse {
     #[prost(message, optional, tag = "1")]
@@ -1507,6 +1703,7 @@ pub struct ExecuteSchemeQueryResponse {
 }
 /// Holds transaction id
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TransactionMeta {
     /// Transaction identifier
@@ -1515,6 +1712,7 @@ pub struct TransactionMeta {
 }
 /// Holds query id and type of parameters
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct QueryMeta {
     /// Query identifier
@@ -1529,6 +1727,7 @@ pub struct QueryMeta {
 }
 /// One QueryResult can contain multiple tables
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ExecuteQueryResult {
     /// Result rets (for each table)
@@ -1546,6 +1745,7 @@ pub struct ExecuteQueryResult {
 }
 /// Explain data query
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ExplainDataQueryRequest {
     /// Session identifier
@@ -1560,6 +1760,7 @@ pub struct ExplainDataQueryRequest {
     pub collect_full_diagnostics: bool,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ExplainDataQueryResponse {
     /// Holds ExplainQueryResult in case of successful call
@@ -1567,6 +1768,7 @@ pub struct ExplainDataQueryResponse {
     pub operation: ::core::option::Option<super::operations::Operation>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ExplainQueryResult {
     #[prost(string, tag = "1")]
@@ -1578,6 +1780,7 @@ pub struct ExplainQueryResult {
 }
 /// Prepare given program to execute
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PrepareDataQueryRequest {
     /// Session identifier
@@ -1590,6 +1793,7 @@ pub struct PrepareDataQueryRequest {
     pub operation_params: ::core::option::Option<super::operations::OperationParams>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PrepareDataQueryResponse {
     /// Holds PrepareQueryResult in case of successful call
@@ -1597,6 +1801,7 @@ pub struct PrepareDataQueryResponse {
     pub operation: ::core::option::Option<super::operations::Operation>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PrepareQueryResult {
     /// Query id, used to perform ExecuteDataQuery
@@ -1611,6 +1816,7 @@ pub struct PrepareQueryResult {
 }
 /// Keep session alive
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct KeepAliveRequest {
     /// Session identifier
@@ -1620,12 +1826,14 @@ pub struct KeepAliveRequest {
     pub operation_params: ::core::option::Option<super::operations::OperationParams>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct KeepAliveResponse {
     #[prost(message, optional, tag = "1")]
     pub operation: ::core::option::Option<super::operations::Operation>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct KeepAliveResult {
     #[prost(enumeration = "keep_alive_result::SessionStatus", tag = "1")]
@@ -1662,10 +1870,20 @@ pub mod keep_alive_result {
                 SessionStatus::Busy => "SESSION_STATUS_BUSY",
             }
         }
+        /// Creates an enum from field names used in the ProtoBuf definition.
+        pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+            match value {
+                "SESSION_STATUS_UNSPECIFIED" => Some(Self::Unspecified),
+                "SESSION_STATUS_READY" => Some(Self::Ready),
+                "SESSION_STATUS_BUSY" => Some(Self::Busy),
+                _ => None,
+            }
+        }
     }
 }
 /// Begin transaction on given session with given settings
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BeginTransactionRequest {
     /// Session identifier
@@ -1677,6 +1895,7 @@ pub struct BeginTransactionRequest {
     pub operation_params: ::core::option::Option<super::operations::OperationParams>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BeginTransactionResponse {
     /// Holds BeginTransactionResult in case of successful call
@@ -1684,6 +1903,7 @@ pub struct BeginTransactionResponse {
     pub operation: ::core::option::Option<super::operations::Operation>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BeginTransactionResult {
     #[prost(message, optional, tag = "1")]
@@ -1691,6 +1911,7 @@ pub struct BeginTransactionResult {
 }
 /// Commit transaction with given session and tx id
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CommitTransactionRequest {
     /// Session identifier
@@ -1705,12 +1926,14 @@ pub struct CommitTransactionRequest {
     pub collect_stats: i32,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CommitTransactionResponse {
     #[prost(message, optional, tag = "1")]
     pub operation: ::core::option::Option<super::operations::Operation>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CommitTransactionResult {
     #[prost(message, optional, tag = "1")]
@@ -1718,6 +1941,7 @@ pub struct CommitTransactionResult {
 }
 /// Rollback transaction with given session and tx id
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RollbackTransactionRequest {
     /// Session identifier
@@ -1730,12 +1954,14 @@ pub struct RollbackTransactionRequest {
     pub operation_params: ::core::option::Option<super::operations::OperationParams>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RollbackTransactionResponse {
     #[prost(message, optional, tag = "1")]
     pub operation: ::core::option::Option<super::operations::Operation>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StoragePolicyDescription {
     #[prost(string, tag = "1")]
@@ -1747,6 +1973,7 @@ pub struct StoragePolicyDescription {
     >,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CompactionPolicyDescription {
     #[prost(string, tag = "1")]
@@ -1758,6 +1985,7 @@ pub struct CompactionPolicyDescription {
     >,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PartitioningPolicyDescription {
     #[prost(string, tag = "1")]
@@ -1769,6 +1997,7 @@ pub struct PartitioningPolicyDescription {
     >,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ExecutionPolicyDescription {
     #[prost(string, tag = "1")]
@@ -1780,6 +2009,7 @@ pub struct ExecutionPolicyDescription {
     >,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ReplicationPolicyDescription {
     #[prost(string, tag = "1")]
@@ -1791,6 +2021,7 @@ pub struct ReplicationPolicyDescription {
     >,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CachingPolicyDescription {
     #[prost(string, tag = "1")]
@@ -1802,6 +2033,7 @@ pub struct CachingPolicyDescription {
     >,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TableProfileDescription {
     #[prost(string, tag = "1")]
@@ -1849,12 +2081,14 @@ pub struct TableProfileDescription {
     >,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DescribeTableOptionsRequest {
     #[prost(message, optional, tag = "1")]
     pub operation_params: ::core::option::Option<super::operations::OperationParams>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DescribeTableOptionsResponse {
     /// operation.result holds ListTableParametersResult
@@ -1862,6 +2096,7 @@ pub struct DescribeTableOptionsResponse {
     pub operation: ::core::option::Option<super::operations::Operation>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DescribeTableOptionsResult {
     #[prost(message, repeated, tag = "1")]
@@ -1884,6 +2119,7 @@ pub struct DescribeTableOptionsResult {
     pub caching_policy_presets: ::prost::alloc::vec::Vec<CachingPolicyDescription>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct KeyRange {
     /// Left border
@@ -1897,6 +2133,7 @@ pub struct KeyRange {
 pub mod key_range {
     /// Left border
     #[derive(serde::Serialize, serde::Deserialize)]
+    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum FromBound {
         /// Specify if we don't want to include given key
@@ -1908,6 +2145,7 @@ pub mod key_range {
     }
     /// Right border
     #[derive(serde::Serialize, serde::Deserialize)]
+    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum ToBound {
         /// Specify if we don't want to include given key
@@ -1920,6 +2158,7 @@ pub mod key_range {
 }
 /// Request to read table (without SQL)
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ReadTableRequest {
     /// Session identifier
@@ -1956,6 +2195,7 @@ pub struct ReadTableRequest {
 }
 /// ReadTable doesn't use Operation, returns result directly
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ReadTableResponse {
     /// Status of request (same as other statuses)
@@ -1973,6 +2213,7 @@ pub struct ReadTableResponse {
 }
 /// Result of read table request
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ReadTableResult {
     /// Result set (same as result of sql request)
@@ -1980,6 +2221,7 @@ pub struct ReadTableResult {
     pub result_set: ::core::option::Option<super::ResultSet>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ReadRowsRequest {
     /// Session identifier
@@ -1997,6 +2239,7 @@ pub struct ReadRowsRequest {
     pub columns: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ReadRowsResponse {
     /// Status of request (same as other statuses)
@@ -2010,6 +2253,7 @@ pub struct ReadRowsResponse {
     pub result_set: ::core::option::Option<super::ResultSet>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BulkUpsertRequest {
     #[prost(string, tag = "1")]
@@ -2032,6 +2276,7 @@ pub struct BulkUpsertRequest {
 pub mod bulk_upsert_request {
     /// You may set data_format + data instead of rows to insert data in serialized formats.
     #[derive(serde::Serialize, serde::Deserialize)]
+    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum DataFormat {
         #[prost(message, tag = "7")]
@@ -2041,15 +2286,18 @@ pub mod bulk_upsert_request {
     }
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BulkUpsertResponse {
     #[prost(message, optional, tag = "1")]
     pub operation: ::core::option::Option<super::operations::Operation>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BulkUpsertResult {}
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ExecuteScanQueryRequest {
     #[prost(message, optional, tag = "3")]
@@ -2100,9 +2348,19 @@ pub mod execute_scan_query_request {
                 Mode::Exec => "MODE_EXEC",
             }
         }
+        /// Creates an enum from field names used in the ProtoBuf definition.
+        pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+            match value {
+                "MODE_UNSPECIFIED" => Some(Self::Unspecified),
+                "MODE_EXPLAIN" => Some(Self::Explain),
+                "MODE_EXEC" => Some(Self::Exec),
+                _ => None,
+            }
+        }
     }
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ExecuteScanQueryPartialResponse {
     #[prost(enumeration = "super::status_ids::StatusCode", tag = "1")]
@@ -2113,6 +2371,7 @@ pub struct ExecuteScanQueryPartialResponse {
     pub result: ::core::option::Option<ExecuteScanQueryPartialResult>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ExecuteScanQueryPartialResult {
     #[prost(message, optional, tag = "1")]
@@ -2141,6 +2400,15 @@ impl StoreType {
             StoreType::Unspecified => "STORE_TYPE_UNSPECIFIED",
             StoreType::Row => "STORE_TYPE_ROW",
             StoreType::Column => "STORE_TYPE_COLUMN",
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "STORE_TYPE_UNSPECIFIED" => Some(Self::Unspecified),
+            "STORE_TYPE_ROW" => Some(Self::Row),
+            "STORE_TYPE_COLUMN" => Some(Self::Column),
+            _ => None,
         }
     }
 }

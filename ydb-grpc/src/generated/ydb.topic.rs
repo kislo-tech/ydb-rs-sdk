@@ -1,5 +1,6 @@
 /// Description of supported codecs.
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SupportedCodecs {
     /// List of supported codecs.
@@ -10,6 +11,7 @@ pub struct SupportedCodecs {
 /// Represents range [start, end).
 /// I.e. (end - 1) is the greatest of offsets, included in non-empty range.
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct OffsetsRange {
     #[prost(int64, tag = "1")]
@@ -20,15 +22,18 @@ pub struct OffsetsRange {
 /// In-session reauthentication and reauthorization, lets user increase session lifetime.
 /// Client should wait for UpdateTokenResponse before sending next UpdateTokenRequest.
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateTokenRequest {
     #[prost(string, tag = "1")]
     pub token: ::prost::alloc::string::String,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateTokenResponse {}
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PartitionWithGeneration {
     /// Partition identifier.
@@ -39,6 +44,7 @@ pub struct PartitionWithGeneration {
     pub generation: i64,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MetadataItem {
     #[prost(string, tag = "1")]
@@ -48,6 +54,7 @@ pub struct MetadataItem {
 }
 /// Messages for bidirectional streaming rpc StreamWrite
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StreamWriteMessage {}
 /// Nested message and enum types in `StreamWriteMessage`.
@@ -57,6 +64,7 @@ pub mod stream_write_message {
     ///      WriteRequest - portion of data to be written.
     ///      UpdateTokenRequest - user credentials if update is needed.
     #[derive(serde::Serialize, serde::Deserialize)]
+    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct FromClient {
         #[prost(oneof = "from_client::ClientMessage", tags = "1, 2, 3")]
@@ -65,6 +73,7 @@ pub mod stream_write_message {
     /// Nested message and enum types in `FromClient`.
     pub mod from_client {
         #[derive(serde::Serialize, serde::Deserialize)]
+        #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Oneof)]
         pub enum ClientMessage {
             #[prost(message, tag = "1")]
@@ -80,6 +89,7 @@ pub mod stream_write_message {
     ///      WriteResponse - acknowledgment of storing client messages.
     ///      UpdateTokenResponse - acknowledgment of reauthentication and reauthorization.
     #[derive(serde::Serialize, serde::Deserialize)]
+    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct FromServer {
         /// Server status of response.
@@ -94,6 +104,7 @@ pub mod stream_write_message {
     /// Nested message and enum types in `FromServer`.
     pub mod from_server {
         #[derive(serde::Serialize, serde::Deserialize)]
+        #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Oneof)]
         pub enum ServerMessage {
             #[prost(message, tag = "3")]
@@ -106,6 +117,7 @@ pub mod stream_write_message {
     }
     /// Handshake request that must be sent to server first.
     #[derive(serde::Serialize, serde::Deserialize)]
+    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct InitRequest {
         /// Full path of topic to write to.
@@ -136,6 +148,7 @@ pub mod stream_write_message {
         /// Option for setting order on messages.
         /// If neither is set, no guarantees on ordering or partitions to write to.
         #[derive(serde::Serialize, serde::Deserialize)]
+        #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Oneof)]
         pub enum Partitioning {
             /// All messages with given pair (producer_id, message_group_id) go to single partition in order of writes.
@@ -151,6 +164,7 @@ pub mod stream_write_message {
     }
     /// Response to the handshake.
     #[derive(serde::Serialize, serde::Deserialize)]
+    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct InitResponse {
         /// Last persisted message's sequence number for this producer.
@@ -170,6 +184,7 @@ pub mod stream_write_message {
     }
     /// Represents portion of client messages.
     #[derive(serde::Serialize, serde::Deserialize)]
+    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct WriteRequest {
         #[prost(message, repeated, tag = "1")]
@@ -184,6 +199,7 @@ pub mod stream_write_message {
     /// Nested message and enum types in `WriteRequest`.
     pub mod write_request {
         #[derive(serde::Serialize, serde::Deserialize)]
+        #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct MessageData {
             /// Message sequence number, provided by client for deduplication.
@@ -212,6 +228,7 @@ pub mod stream_write_message {
         pub mod message_data {
             /// Per-message override for respective write session settings.
             #[derive(serde::Serialize, serde::Deserialize)]
+            #[allow(clippy::derive_partial_eq_without_eq)]
             #[derive(Clone, PartialEq, ::prost::Oneof)]
             pub enum Partitioning {
                 /// All messages with given pair (producer_id, message_group_id) go to single partition in order of writes.
@@ -229,6 +246,7 @@ pub mod stream_write_message {
     /// Message that represents acknowledgment for sequence of client messages.
     /// This sequence is persisted together so write statistics is for messages batch.
     #[derive(serde::Serialize, serde::Deserialize)]
+    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct WriteResponse {
         /// Number of acks is equal to number of messages in the corresponding WriteRequests.
@@ -247,6 +265,7 @@ pub mod stream_write_message {
     pub mod write_response {
         /// Acknowledgment for one persistently written message.
         #[derive(serde::Serialize, serde::Deserialize)]
+        #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct WriteAck {
             /// Sequence number as in WriteRequest.
@@ -261,6 +280,7 @@ pub mod stream_write_message {
         /// Nested message and enum types in `WriteAck`.
         pub mod write_ack {
             #[derive(serde::Serialize, serde::Deserialize)]
+            #[allow(clippy::derive_partial_eq_without_eq)]
             #[derive(Clone, PartialEq, ::prost::Message)]
             pub struct Written {
                 /// Assigned partition offset.
@@ -268,6 +288,7 @@ pub mod stream_write_message {
                 pub offset: i64,
             }
             #[derive(serde::Serialize, serde::Deserialize)]
+            #[allow(clippy::derive_partial_eq_without_eq)]
             #[derive(Clone, PartialEq, ::prost::Message)]
             pub struct Skipped {
                 #[prost(enumeration = "skipped::Reason", tag = "1")]
@@ -302,13 +323,23 @@ pub mod stream_write_message {
                             Reason::AlreadyWritten => "REASON_ALREADY_WRITTEN",
                         }
                     }
+                    /// Creates an enum from field names used in the ProtoBuf definition.
+                    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+                        match value {
+                            "REASON_UNSPECIFIED" => Some(Self::Unspecified),
+                            "REASON_ALREADY_WRITTEN" => Some(Self::AlreadyWritten),
+                            _ => None,
+                        }
+                    }
                 }
             }
             #[derive(serde::Serialize, serde::Deserialize)]
+            #[allow(clippy::derive_partial_eq_without_eq)]
             #[derive(Clone, PartialEq, ::prost::Message)]
             pub struct WrittenInTx {}
             /// Either message is written for the first time or duplicate.
             #[derive(serde::Serialize, serde::Deserialize)]
+            #[allow(clippy::derive_partial_eq_without_eq)]
             #[derive(Clone, PartialEq, ::prost::Oneof)]
             pub enum MessageWriteStatus {
                 #[prost(message, tag = "2")]
@@ -321,6 +352,7 @@ pub mod stream_write_message {
         }
         /// Message with write statistics.
         #[derive(serde::Serialize, serde::Deserialize)]
+        #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct WriteStatistics {
             /// Time spent in persisting of data. Same for each message in response.
@@ -353,6 +385,7 @@ pub mod stream_write_message {
 }
 /// Messages for bidirectional streaming rpc StreamRead
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StreamReadMessage {}
 /// Nested message and enum types in `StreamReadMessage`.
@@ -360,6 +393,7 @@ pub mod stream_read_message {
     /// Within a StreamRead session delivered messages are separated by partition.
     /// Reads from a single partition are represented by a partition session.
     #[derive(serde::Serialize, serde::Deserialize)]
+    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct PartitionSession {
         /// Identifier of partition session. Unique inside one RPC call.
@@ -384,6 +418,7 @@ pub mod stream_read_message {
     ///      StopPartitionSessionResponse - Response to StreamReadServerMessage.StopPartitionSessionRequest.
     ///          Client signals it has finished working with partition. Mandatory for graceful stop, optional otherwise.
     #[derive(serde::Serialize, serde::Deserialize)]
+    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct FromClient {
         #[prost(oneof = "from_client::ClientMessage", tags = "1, 2, 3, 4, 5, 8, 6, 7")]
@@ -392,6 +427,7 @@ pub mod stream_read_message {
     /// Nested message and enum types in `FromClient`.
     pub mod from_client {
         #[derive(serde::Serialize, serde::Deserialize)]
+        #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Oneof)]
         pub enum ClientMessage {
             /// Client requests.
@@ -424,6 +460,7 @@ pub mod stream_read_message {
     ///      StopPartitionSessionRequest - command from server to destroy a partition session.
     ///      UpdatePartitionSession - command from server to update a partition session.
     #[derive(serde::Serialize, serde::Deserialize)]
+    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct FromServer {
         /// Server status of response.
@@ -432,12 +469,16 @@ pub mod stream_read_message {
         /// Issues if any.
         #[prost(message, repeated, tag = "2")]
         pub issues: ::prost::alloc::vec::Vec<super::super::issue::IssueMessage>,
-        #[prost(oneof = "from_server::ServerMessage", tags = "3, 4, 5, 6, 7, 8, 9, 10")]
+        #[prost(
+            oneof = "from_server::ServerMessage",
+            tags = "3, 4, 5, 6, 7, 8, 9, 10, 11"
+        )]
         pub server_message: ::core::option::Option<from_server::ServerMessage>,
     }
     /// Nested message and enum types in `FromServer`.
     pub mod from_server {
         #[derive(serde::Serialize, serde::Deserialize)]
+        #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Oneof)]
         pub enum ServerMessage {
             /// Responses to respective client requests.
@@ -458,10 +499,13 @@ pub mod stream_read_message {
             StopPartitionSessionRequest(super::StopPartitionSessionRequest),
             #[prost(message, tag = "10")]
             UpdatePartitionSession(super::UpdatePartitionSession),
+            #[prost(message, tag = "11")]
+            EndPartitionSession(super::EndPartitionSession),
         }
     }
     /// Handshake request.
     #[derive(serde::Serialize, serde::Deserialize)]
+    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct InitRequest {
         /// Message that describes topic to read.
@@ -479,10 +523,14 @@ pub mod stream_read_message {
         /// Direct reading from a partition node.
         #[prost(bool, tag = "4")]
         pub direct_read: bool,
+        /// Indicates that the SDK supports auto partitioning.
+        #[prost(bool, tag = "5")]
+        pub auto_partitioning_support: bool,
     }
     /// Nested message and enum types in `InitRequest`.
     pub mod init_request {
         #[derive(serde::Serialize, serde::Deserialize)]
+        #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct TopicReadSettings {
             /// Topic path.
@@ -508,6 +556,7 @@ pub mod stream_read_message {
     }
     /// Handshake response.
     #[derive(serde::Serialize, serde::Deserialize)]
+    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct InitResponse {
         /// Read session identifier.
@@ -516,6 +565,7 @@ pub mod stream_read_message {
     }
     /// Message that represents client readiness for receiving more data.
     #[derive(serde::Serialize, serde::Deserialize)]
+    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct ReadRequest {
         /// Server and client each keep track of total bytes size of all ReadResponses.
@@ -541,6 +591,7 @@ pub mod stream_read_message {
     }
     /// Data read.
     #[derive(serde::Serialize, serde::Deserialize)]
+    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct ReadResponse {
         /// Client messages, divided by partitions.
@@ -555,6 +606,7 @@ pub mod stream_read_message {
     pub mod read_response {
         /// One client message representation.
         #[derive(serde::Serialize, serde::Deserialize)]
+        #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct MessageData {
             /// Partition offset in partition that assigned for message.
@@ -585,6 +637,7 @@ pub mod stream_read_message {
         }
         /// Representation of sequence of client messages from one write session.
         #[derive(serde::Serialize, serde::Deserialize)]
+        #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct Batch {
             /// List of client messages.
@@ -611,6 +664,7 @@ pub mod stream_read_message {
         }
         /// Representation of sequence of messages from one partition.
         #[derive(serde::Serialize, serde::Deserialize)]
+        #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct PartitionData {
             #[prost(int64, tag = "1")]
@@ -622,6 +676,7 @@ pub mod stream_read_message {
     }
     /// Signal for server that client processed some read data.
     #[derive(serde::Serialize, serde::Deserialize)]
+    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct CommitOffsetRequest {
         /// Partition offsets that indicates processed data.
@@ -634,6 +689,7 @@ pub mod stream_read_message {
     pub mod commit_offset_request {
         /// Message that is used for describing commit.
         #[derive(serde::Serialize, serde::Deserialize)]
+        #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct PartitionCommitOffset {
             /// Identifier of partition session with data to commit.
@@ -646,6 +702,7 @@ pub mod stream_read_message {
     }
     /// Acknowledgement for commits.
     #[derive(serde::Serialize, serde::Deserialize)]
+    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct CommitOffsetResponse {
         /// Partitions with progress.
@@ -658,6 +715,7 @@ pub mod stream_read_message {
     pub mod commit_offset_response {
         /// Per-partition commit representation.
         #[derive(serde::Serialize, serde::Deserialize)]
+        #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct PartitionCommittedOffset {
             /// Partition session identifier.
@@ -669,6 +727,7 @@ pub mod stream_read_message {
         }
     }
     #[derive(serde::Serialize, serde::Deserialize)]
+    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct PartitionSessionStatusRequest {
         #[prost(int64, tag = "1")]
@@ -676,6 +735,7 @@ pub mod stream_read_message {
     }
     /// Response to status request.
     #[derive(serde::Serialize, serde::Deserialize)]
+    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct PartitionSessionStatusResponse {
         /// Identifier of partition session whose status was requested.
@@ -696,6 +756,7 @@ pub mod stream_read_message {
     /// Command from server to create and start a partition session.
     /// Client must respond with StartPartitionSessionResponse when ready to receive data from this partition.
     #[derive(serde::Serialize, serde::Deserialize)]
+    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct StartPartitionSessionRequest {
         /// Partition session description.
@@ -711,8 +772,9 @@ pub mod stream_read_message {
         #[prost(message, optional, tag = "4")]
         pub partition_location: ::core::option::Option<super::PartitionLocation>,
     }
-    /// Signal for server that cient is ready to recive data for partition.
+    /// Signal for server that client is ready to recive data for partition.
     #[derive(serde::Serialize, serde::Deserialize)]
+    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct StartPartitionSessionResponse {
         /// Partition session identifier of partition to start read.
@@ -734,6 +796,7 @@ pub mod stream_read_message {
     }
     /// Command from server to stop and destroy concrete partition session.
     #[derive(serde::Serialize, serde::Deserialize)]
+    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct StopPartitionSessionRequest {
         /// Identifier of partition session that is ready to be closed by server.
@@ -758,6 +821,7 @@ pub mod stream_read_message {
     /// Must be sent only after corresponding StopPartitionSessionRequest from server.
     /// Server will give this partition to other read session only after StopPartitionSessionResponse signal.
     #[derive(serde::Serialize, serde::Deserialize)]
+    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct StopPartitionSessionResponse {
         /// Partition session identifier of partition session that is released by client.
@@ -772,6 +836,7 @@ pub mod stream_read_message {
     /// Command from server to notify about a partition session update.
     /// Client should not send a response to the command.
     #[derive(serde::Serialize, serde::Deserialize)]
+    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct UpdatePartitionSession {
         /// Partition session identifier.
@@ -784,6 +849,7 @@ pub mod stream_read_message {
     /// Signal for server that client has finished direct reading.
     /// Server should not send a response to the command.
     #[derive(serde::Serialize, serde::Deserialize)]
+    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct DirectReadAck {
         /// Partition session identifier.
@@ -793,18 +859,40 @@ pub mod stream_read_message {
         #[prost(int64, tag = "2")]
         pub direct_read_id: i64,
     }
+    /// Signal from server that client has finished reading the partition and all messages have been read.
+    /// Once a partition has been finished no further messages will ever arrive to that partition.
+    /// This command is a hint to the client to commit offsets, after which the child partitions will be balanced independently in different reading sessions.
+    /// Unlike StopPartitionSessionRequest, the client does not have to close the reading session.
+    /// Client should not send a response to the command.
+    #[derive(serde::Serialize, serde::Deserialize)]
+    #[allow(clippy::derive_partial_eq_without_eq)]
+    #[derive(Clone, PartialEq, ::prost::Message)]
+    pub struct EndPartitionSession {
+        /// Partition session identifier.
+        #[prost(int64, tag = "1")]
+        pub partition_session_id: i64,
+        /// Ids of partitions which were merged with the ended partition.
+        #[prost(int64, repeated, tag = "2")]
+        pub adjacent_partition_ids: ::prost::alloc::vec::Vec<i64>,
+        /// Ids of partitions which was formed when the ended partition was split or merged.
+        #[prost(int64, repeated, tag = "3")]
+        pub child_partition_ids: ::prost::alloc::vec::Vec<i64>,
+    }
 }
 /// Messages for bidirectional streaming rpc StreamDirectRead
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StreamDirectReadMessage {}
 /// Nested message and enum types in `StreamDirectReadMessage`.
 pub mod stream_direct_read_message {
     /// Client-server message for direct read session.
-    ///      InitDirectRead - command from client to create and start a direct read session.
-    ///      StartDirectReadPartitionSession - command from client to create and start a direct read partition session.
+    ///      InitRequest - command from client to create and start a direct read session.
+    ///      StartDirectReadPartitionSessionRequest - command from client to create and start a direct read partition session.
+    ///          Client signals it is ready to get data from partition.
     ///      UpdateTokenRequest - request to update auth token
     #[derive(serde::Serialize, serde::Deserialize)]
+    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct FromClient {
         #[prost(oneof = "from_client::ClientMessage", tags = "1, 2, 3")]
@@ -813,21 +901,27 @@ pub mod stream_direct_read_message {
     /// Nested message and enum types in `FromClient`.
     pub mod from_client {
         #[derive(serde::Serialize, serde::Deserialize)]
+        #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Oneof)]
         pub enum ClientMessage {
             #[prost(message, tag = "1")]
-            InitDirectRead(super::InitDirectRead),
+            InitRequest(super::InitRequest),
             #[prost(message, tag = "2")]
-            StartDirectReadPartitionSession(super::StartDirectReadPartitionSession),
+            StartDirectReadPartitionSessionRequest(
+                super::StartDirectReadPartitionSessionRequest,
+            ),
             #[prost(message, tag = "3")]
             UpdateTokenRequest(super::super::UpdateTokenRequest),
         }
     }
     /// Server-client message for direct read session.
+    ///      InitResponse - correct handshake response.
+    ///      StartDirectReadPartitionSessionResponse - Response to StartDirectReadPartitionSessionRequest.
     ///      DirectReadResponse - portion of message data.
     ///      StopDirectReadPartitionSession - command from server to stop a direct read partition session.
     ///      UpdateTokenResponse - acknowledgment of token update.
     #[derive(serde::Serialize, serde::Deserialize)]
+    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct FromServer {
         /// Server status of response.
@@ -836,14 +930,21 @@ pub mod stream_direct_read_message {
         /// Issues if any.
         #[prost(message, repeated, tag = "2")]
         pub issues: ::prost::alloc::vec::Vec<super::super::issue::IssueMessage>,
-        #[prost(oneof = "from_server::ServerMessage", tags = "3, 4, 5")]
+        #[prost(oneof = "from_server::ServerMessage", tags = "6, 7, 3, 4, 5")]
         pub server_message: ::core::option::Option<from_server::ServerMessage>,
     }
     /// Nested message and enum types in `FromServer`.
     pub mod from_server {
         #[derive(serde::Serialize, serde::Deserialize)]
+        #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Oneof)]
         pub enum ServerMessage {
+            #[prost(message, tag = "6")]
+            InitResponse(super::InitResponse),
+            #[prost(message, tag = "7")]
+            StartDirectReadPartitionSessionResponse(
+                super::StartDirectReadPartitionSessionResponse,
+            ),
             #[prost(message, tag = "3")]
             StopDirectReadPartitionSession(super::StopDirectReadPartitionSession),
             #[prost(message, tag = "4")]
@@ -855,23 +956,25 @@ pub mod stream_direct_read_message {
     /// Command from client to create and start a direct read session.
     /// Server should not send a response to the command.
     #[derive(serde::Serialize, serde::Deserialize)]
+    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
-    pub struct InitDirectRead {
+    pub struct InitRequest {
         /// Read session identifier.
         #[prost(string, tag = "1")]
         pub session_id: ::prost::alloc::string::String,
         /// Topics that will be read by this session.
         #[prost(message, repeated, tag = "2")]
         pub topics_read_settings: ::prost::alloc::vec::Vec<
-            init_direct_read::TopicReadSettings,
+            init_request::TopicReadSettings,
         >,
         /// Path of consumer that is used for reading by this session.
         #[prost(string, tag = "3")]
         pub consumer: ::prost::alloc::string::String,
     }
-    /// Nested message and enum types in `InitDirectRead`.
-    pub mod init_direct_read {
+    /// Nested message and enum types in `InitRequest`.
+    pub mod init_request {
         #[derive(serde::Serialize, serde::Deserialize)]
+        #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct TopicReadSettings {
             /// Topic path.
@@ -879,11 +982,16 @@ pub mod stream_direct_read_message {
             pub path: ::prost::alloc::string::String,
         }
     }
-    /// Command from client to create and start a direct read partition session.
-    /// Server should not send a response to the command.
+    /// Response to the handshake.
     #[derive(serde::Serialize, serde::Deserialize)]
+    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
-    pub struct StartDirectReadPartitionSession {
+    pub struct InitResponse {}
+    /// Command from client to create and start a direct read partition session.
+    #[derive(serde::Serialize, serde::Deserialize)]
+    #[allow(clippy::derive_partial_eq_without_eq)]
+    #[derive(Clone, PartialEq, ::prost::Message)]
+    pub struct StartDirectReadPartitionSessionRequest {
         /// Partition session identifier.
         #[prost(int64, tag = "1")]
         pub partition_session_id: i64,
@@ -894,9 +1002,22 @@ pub mod stream_direct_read_message {
         #[prost(int64, tag = "3")]
         pub generation: i64,
     }
+    /// Signal for server that client is ready to receive data for partition.
+    #[derive(serde::Serialize, serde::Deserialize)]
+    #[allow(clippy::derive_partial_eq_without_eq)]
+    #[derive(Clone, PartialEq, ::prost::Message)]
+    pub struct StartDirectReadPartitionSessionResponse {
+        /// Partition session identifier of partition to start read.
+        #[prost(int64, tag = "1")]
+        pub partition_session_id: i64,
+        /// Partition generation.
+        #[prost(int64, tag = "2")]
+        pub generation: i64,
+    }
     /// Command from server to stop a direct read partition session.
     /// Client should not send a response to the command.
     #[derive(serde::Serialize, serde::Deserialize)]
+    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct StopDirectReadPartitionSession {
         /// The reason for the stop.
@@ -908,10 +1029,14 @@ pub mod stream_direct_read_message {
         /// Partition session identifier.
         #[prost(int64, tag = "3")]
         pub partition_session_id: i64,
+        /// Partition generation.
+        #[prost(int64, tag = "4")]
+        pub generation: i64,
     }
     /// Messages that have been read directly from the partition node.
     /// It's a response to StreamRead.ReadRequest
     #[derive(serde::Serialize, serde::Deserialize)]
+    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct DirectReadResponse {
         /// Partition session identifier.
@@ -925,9 +1050,14 @@ pub mod stream_direct_read_message {
         pub partition_data: ::core::option::Option<
             super::stream_read_message::read_response::PartitionData,
         >,
+        /// Total size in bytes of this response as calculated by server.
+        /// See ReadRequest comment above.
+        #[prost(int64, tag = "4")]
+        pub bytes_size: i64,
     }
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TransactionIdentity {
     /// Transaction identifier from TableService.
@@ -939,6 +1069,7 @@ pub struct TransactionIdentity {
 }
 /// Add offsets to transaction request sent from client to server.
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateOffsetsInTransactionRequest {
     #[prost(message, optional, tag = "1")]
@@ -956,6 +1087,7 @@ pub struct UpdateOffsetsInTransactionRequest {
 /// Nested message and enum types in `UpdateOffsetsInTransactionRequest`.
 pub mod update_offsets_in_transaction_request {
     #[derive(serde::Serialize, serde::Deserialize)]
+    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct TopicOffsets {
         /// Topic path.
@@ -968,6 +1100,7 @@ pub mod update_offsets_in_transaction_request {
     /// Nested message and enum types in `TopicOffsets`.
     pub mod topic_offsets {
         #[derive(serde::Serialize, serde::Deserialize)]
+        #[allow(clippy::derive_partial_eq_without_eq)]
         #[derive(Clone, PartialEq, ::prost::Message)]
         pub struct PartitionOffsets {
             /// Partition identifier.
@@ -981,6 +1114,7 @@ pub mod update_offsets_in_transaction_request {
 }
 /// Add offsets to transaction response sent from server to client.
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateOffsetsInTransactionResponse {
     /// Result of request will be inside operation.
@@ -989,10 +1123,12 @@ pub struct UpdateOffsetsInTransactionResponse {
 }
 /// Add offsets to transaction result message that will be inside UpdateOffsetsInTransactionResponse.operation.
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UpdateOffsetsInTransactionResult {}
 /// Commit offset request sent from client to server.
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CommitOffsetRequest {
     #[prost(message, optional, tag = "1")]
@@ -1009,9 +1145,13 @@ pub struct CommitOffsetRequest {
     /// Processed offset.
     #[prost(int64, tag = "5")]
     pub offset: i64,
+    /// Read session identifier from StreamRead RPC.
+    #[prost(string, tag = "6")]
+    pub read_session_id: ::prost::alloc::string::String,
 }
 /// Commit offset response sent from server to client.
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CommitOffsetResponse {
     /// Result of request will be inside operation.
@@ -1020,10 +1160,12 @@ pub struct CommitOffsetResponse {
 }
 /// Commit offset result message inside CommitOffsetResponse.operation.
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CommitOffsetResult {}
 /// message representing statistics by several windows
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MultipleWindowsStat {
     #[prost(int64, tag = "1")]
@@ -1035,6 +1177,7 @@ pub struct MultipleWindowsStat {
 }
 /// Consumer description.
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Consumer {
     /// Must have valid not empty name as a key.
@@ -1066,6 +1209,7 @@ pub struct Consumer {
 /// Nested message and enum types in `Consumer`.
 pub mod consumer {
     #[derive(serde::Serialize, serde::Deserialize)]
+    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct ConsumerStats {
         /// Minimal timestamp of last read from partitions.
@@ -1083,6 +1227,11 @@ pub mod consumer {
         pub max_write_time_lag: ::core::option::Option<
             super::super::super::google::protobuf::Duration,
         >,
+        /// The difference between the write timestamp of the last commited message and the current time.
+        #[prost(message, optional, tag = "5")]
+        pub max_committed_time_lag: ::core::option::Option<
+            super::super::super::google::protobuf::Duration,
+        >,
         /// Bytes read statistics.
         #[prost(message, optional, tag = "4")]
         pub bytes_read: ::core::option::Option<super::MultipleWindowsStat>,
@@ -1090,6 +1239,7 @@ pub mod consumer {
 }
 /// Consumer alter description.
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AlterConsumer {
     /// Must have valid not empty name as a key.
@@ -1118,32 +1268,121 @@ pub struct AlterConsumer {
 }
 /// Partitioning settings for topic.
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PartitioningSettings {
-    /// Minimum partition count auto merge would stop working at.
+    /// Auto merge would stop working when the partitions count reaches min_active_partitions
     /// Zero value means default - 1.
     #[prost(int64, tag = "1")]
     pub min_active_partitions: i64,
+    /// Auto split would stop working when the partitions count reaches max_active_partitions
+    /// Zero value means default - 1.
+    #[prost(int64, tag = "3")]
+    pub max_active_partitions: i64,
     /// Limit for total partition count, including active (open for write) and read-only partitions.
     /// Zero value means default - 100.
+    /// Use max_active_partitions
+    #[deprecated]
     #[prost(int64, tag = "2")]
     pub partition_count_limit: i64,
+    /// Settings for the partitions count auto partitioning.
+    #[prost(message, optional, tag = "4")]
+    pub auto_partitioning_settings: ::core::option::Option<AutoPartitioningSettings>,
+}
+#[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct AutoPartitioningSettings {
+    /// Strategy of auto partitioning.
+    #[prost(enumeration = "AutoPartitioningStrategy", tag = "1")]
+    pub strategy: i32,
+    /// Partition write speed auto partitioning options.
+    #[prost(message, optional, tag = "2")]
+    pub partition_write_speed: ::core::option::Option<
+        AutoPartitioningWriteSpeedStrategy,
+    >,
+}
+/// Partition will be auto partitioned up (divided into 2 partitions)
+/// after write speed to the partition exceeds up_utilization_percent (in percentage of maximum write speed to the partition) for the period of time stabilization_window
+#[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct AutoPartitioningWriteSpeedStrategy {
+    /// Zero value means default - 300.
+    #[prost(message, optional, tag = "1")]
+    pub stabilization_window: ::core::option::Option<
+        super::super::google::protobuf::Duration,
+    >,
+    /// Zero value means default - 90.
+    #[prost(int32, tag = "2")]
+    pub up_utilization_percent: i32,
+    /// Zero value means default - 30.
+    #[prost(int32, tag = "3")]
+    pub down_utilization_percent: i32,
 }
 /// Partitioning settings for topic.
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AlterPartitioningSettings {
     /// Minimum partition count auto merge would stop working at.
     /// Zero value means default - 1.
     #[prost(int64, optional, tag = "1")]
     pub set_min_active_partitions: ::core::option::Option<i64>,
+    /// Maximum partition count auto merge would stop working at.
+    /// Zero value means default - 1.
+    #[prost(int64, optional, tag = "3")]
+    pub set_max_active_partitions: ::core::option::Option<i64>,
     /// Limit for total partition count, including active (open for write) and read-only partitions.
     /// Zero value means default - 100.
+    /// Use set_max_active_partitions
+    #[deprecated]
     #[prost(int64, optional, tag = "2")]
     pub set_partition_count_limit: ::core::option::Option<i64>,
+    /// Settings for auto partitioning the partition number
+    #[prost(message, optional, tag = "4")]
+    pub alter_auto_partitioning_settings: ::core::option::Option<
+        AlterAutoPartitioningSettings,
+    >,
+}
+#[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct AlterAutoPartitioningSettings {
+    /// Strategy of auto partitioning
+    #[prost(enumeration = "AutoPartitioningStrategy", optional, tag = "1")]
+    pub set_strategy: ::core::option::Option<i32>,
+    /// Auto partitioning write speed options.
+    #[prost(message, optional, tag = "2")]
+    pub set_partition_write_speed: ::core::option::Option<
+        AlterAutoPartitioningWriteSpeedStrategy,
+    >,
+}
+#[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct AlterAutoPartitioningWriteSpeedStrategy {
+    /// The time of exceeding the threshold value, after which the partition will be
+    /// auto partitioning.
+    /// Zero value means default - 300.
+    #[prost(message, optional, tag = "1")]
+    pub set_stabilization_window: ::core::option::Option<
+        super::super::google::protobuf::Duration,
+    >,
+    /// The threshold value of the write speed to the partition as a percentage, when exceeded,
+    /// the partition will be auto split.
+    /// Zero value means default - 90.
+    #[prost(int32, optional, tag = "2")]
+    pub set_up_utilization_percent: ::core::option::Option<i32>,
+    /// The threshold value of the write speed to the partition as a percentage, if it is not reached,
+    /// the partition will be auto merged.
+    /// Zero value means default - 30.
+    #[prost(int32, optional, tag = "3")]
+    pub set_down_utilization_percent: ::core::option::Option<i32>,
 }
 /// Create topic request sent from client to server.
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateTopicRequest {
     #[prost(message, optional, tag = "1")]
@@ -1195,6 +1434,7 @@ pub struct CreateTopicRequest {
 /// Create topic response sent from server to client.
 /// If topic is already exists then response status will be "ALREADY_EXISTS".
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateTopicResponse {
     /// Result of request will be inside operation.
@@ -1203,10 +1443,12 @@ pub struct CreateTopicResponse {
 }
 /// Create topic result message that will be inside CreateTopicResponse.operation.
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateTopicResult {}
 /// Topic partition location
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PartitionLocation {
     /// Node identificator.
@@ -1218,6 +1460,7 @@ pub struct PartitionLocation {
 }
 /// Describe topic request sent from client to server.
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DescribeTopicRequest {
     #[prost(message, optional, tag = "1")]
@@ -1235,14 +1478,27 @@ pub struct DescribeTopicRequest {
 /// Describe topic response sent from server to client.
 /// If topic is not existed then response status will be "SCHEME_ERROR".
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DescribeTopicResponse {
     /// Result of request will be inside operation.
     #[prost(message, optional, tag = "1")]
     pub operation: ::core::option::Option<super::operations::Operation>,
 }
+#[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct PartitionKeyRange {
+    /// Inclusive left border. Emptiness means -inf.
+    #[prost(bytes = "vec", optional, tag = "1")]
+    pub from_bound: ::core::option::Option<::prost::alloc::vec::Vec<u8>>,
+    /// Exclusive right border. Emptiness means +inf.
+    #[prost(bytes = "vec", optional, tag = "2")]
+    pub to_bound: ::core::option::Option<::prost::alloc::vec::Vec<u8>>,
+}
 /// Describe topic result message that will be inside DescribeTopicResponse.operation.
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DescribeTopicResult {
     /// Description of scheme object.
@@ -1301,6 +1557,7 @@ pub struct DescribeTopicResult {
 /// Nested message and enum types in `DescribeTopicResult`.
 pub mod describe_topic_result {
     #[derive(serde::Serialize, serde::Deserialize)]
+    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct PartitionInfo {
         /// Partition identifier.
@@ -1321,8 +1578,11 @@ pub mod describe_topic_result {
         /// Partition location, filled only when include_location in request is true.
         #[prost(message, optional, tag = "6")]
         pub partition_location: ::core::option::Option<super::PartitionLocation>,
+        #[prost(message, optional, tag = "7")]
+        pub key_range: ::core::option::Option<super::PartitionKeyRange>,
     }
     #[derive(serde::Serialize, serde::Deserialize)]
+    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct TopicStats {
         /// Approximate size of topic.
@@ -1345,6 +1605,7 @@ pub mod describe_topic_result {
 }
 /// Describe partition request sent from client to server.
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DescribePartitionRequest {
     #[prost(message, optional, tag = "1")]
@@ -1365,14 +1626,16 @@ pub struct DescribePartitionRequest {
 /// Describe partition response sent from server to client.
 /// If topic is not existed then response status will be "SCHEME_ERROR".
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DescribePartitionResponse {
     /// Result of request will be inside operation.
     #[prost(message, optional, tag = "1")]
     pub operation: ::core::option::Option<super::operations::Operation>,
 }
-/// Describe partition result message that will be inside DescribeTopicResponse.operation.
+/// Describe partition result message that will be inside DescribePartitionResponse.operation.
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DescribePartitionResult {
     /// Partitions description.
@@ -1381,6 +1644,7 @@ pub struct DescribePartitionResult {
 }
 /// Describe topic's consumer request sent from client to server.
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DescribeConsumerRequest {
     #[prost(message, optional, tag = "1")]
@@ -1401,6 +1665,7 @@ pub struct DescribeConsumerRequest {
 /// Describe topic's consumer response sent from server to client.
 /// If topic is not existed then response status will be "SCHEME_ERROR".
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DescribeConsumerResponse {
     /// Result of request will be inside operation.
@@ -1409,6 +1674,7 @@ pub struct DescribeConsumerResponse {
 }
 /// Describe topic's consumer result message that will be inside DescribeConsumerResponse.operation.
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DescribeConsumerResult {
     /// Description of scheme object.
@@ -1422,6 +1688,7 @@ pub struct DescribeConsumerResult {
 /// Nested message and enum types in `DescribeConsumerResult`.
 pub mod describe_consumer_result {
     #[derive(serde::Serialize, serde::Deserialize)]
+    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct PartitionInfo {
         /// Partition identifier.
@@ -1447,6 +1714,7 @@ pub mod describe_consumer_result {
         pub partition_location: ::core::option::Option<super::PartitionLocation>,
     }
     #[derive(serde::Serialize, serde::Deserialize)]
+    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct PartitionConsumerStats {
         /// Last read offset from this partition.
@@ -1478,6 +1746,11 @@ pub mod describe_consumer_result {
         pub max_write_time_lag: ::core::option::Option<
             super::super::super::google::protobuf::Duration,
         >,
+        /// The difference between the write timestamp of the last commited message and the current time.
+        #[prost(message, optional, tag = "13")]
+        pub max_committed_time_lag: ::core::option::Option<
+            super::super::super::google::protobuf::Duration,
+        >,
         /// How much bytes were read during several windows statistics from this partition.
         #[prost(message, optional, tag = "8")]
         pub bytes_read: ::core::option::Option<super::MultipleWindowsStat>,
@@ -1490,6 +1763,7 @@ pub mod describe_consumer_result {
     }
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PartitionStats {
     /// Partition contains messages with offsets in range [start, end).
@@ -1519,6 +1793,7 @@ pub struct PartitionStats {
 }
 /// Update existing topic request sent from client to server.
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AlterTopicRequest {
     #[prost(message, optional, tag = "1")]
@@ -1573,6 +1848,7 @@ pub struct AlterTopicRequest {
 }
 /// Update topic response sent from server to client.
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AlterTopicResponse {
     /// Result of request will be inside operation.
@@ -1581,10 +1857,12 @@ pub struct AlterTopicResponse {
 }
 /// Update topic result message that will be inside UpdateTopicResponse.operation.
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AlterTopicResult {}
 /// Drop topic request sent from client to server.
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DropTopicRequest {
     #[prost(message, optional, tag = "1")]
@@ -1596,6 +1874,7 @@ pub struct DropTopicRequest {
 /// Drop topic response sent from server to client.
 /// If topic not exists then response status will be "SCHEME_ERROR".
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DropTopicResponse {
     /// Result of request will be inside operation.
@@ -1604,6 +1883,7 @@ pub struct DropTopicResponse {
 }
 /// Drop topic result message that will be inside DropTopicResponse.operation.
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DropTopicResult {}
 #[derive(serde::Serialize, serde::Deserialize)]
@@ -1632,6 +1912,63 @@ impl Codec {
             Codec::Custom => "CODEC_CUSTOM",
         }
     }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "CODEC_UNSPECIFIED" => Some(Self::Unspecified),
+            "CODEC_RAW" => Some(Self::Raw),
+            "CODEC_GZIP" => Some(Self::Gzip),
+            "CODEC_LZOP" => Some(Self::Lzop),
+            "CODEC_ZSTD" => Some(Self::Zstd),
+            "CODEC_CUSTOM" => Some(Self::Custom),
+            _ => None,
+        }
+    }
+}
+#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+pub enum AutoPartitioningStrategy {
+    /// The auto partitioning algorithm is not specified. The default value will be used.
+    Unspecified = 0,
+    /// The auto partitioning is disabled.
+    Disabled = 1,
+    /// The auto partitioning algorithm will increase partitions count depending on the load characteristics.
+    /// The auto partitioning algorithm will never decrease the number of partitions.
+    ScaleUp = 2,
+    /// The auto partitioning algorithm will both increase and decrease partitions count depending on the load characteristics.
+    ScaleUpAndDown = 3,
+    /// The auto partitioning is paused.
+    Paused = 4,
+}
+impl AutoPartitioningStrategy {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            AutoPartitioningStrategy::Unspecified => {
+                "AUTO_PARTITIONING_STRATEGY_UNSPECIFIED"
+            }
+            AutoPartitioningStrategy::Disabled => "AUTO_PARTITIONING_STRATEGY_DISABLED",
+            AutoPartitioningStrategy::ScaleUp => "AUTO_PARTITIONING_STRATEGY_SCALE_UP",
+            AutoPartitioningStrategy::ScaleUpAndDown => {
+                "AUTO_PARTITIONING_STRATEGY_SCALE_UP_AND_DOWN"
+            }
+            AutoPartitioningStrategy::Paused => "AUTO_PARTITIONING_STRATEGY_PAUSED",
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "AUTO_PARTITIONING_STRATEGY_UNSPECIFIED" => Some(Self::Unspecified),
+            "AUTO_PARTITIONING_STRATEGY_DISABLED" => Some(Self::Disabled),
+            "AUTO_PARTITIONING_STRATEGY_SCALE_UP" => Some(Self::ScaleUp),
+            "AUTO_PARTITIONING_STRATEGY_SCALE_UP_AND_DOWN" => Some(Self::ScaleUpAndDown),
+            "AUTO_PARTITIONING_STRATEGY_PAUSED" => Some(Self::Paused),
+            _ => None,
+        }
+    }
 }
 /// Metering mode specifies the method used to determine consumption of resources by the topic.
 /// This settings will have an effect only in a serverless database.
@@ -1655,6 +1992,15 @@ impl MeteringMode {
             MeteringMode::Unspecified => "METERING_MODE_UNSPECIFIED",
             MeteringMode::ReservedCapacity => "METERING_MODE_RESERVED_CAPACITY",
             MeteringMode::RequestUnits => "METERING_MODE_REQUEST_UNITS",
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "METERING_MODE_UNSPECIFIED" => Some(Self::Unspecified),
+            "METERING_MODE_RESERVED_CAPACITY" => Some(Self::ReservedCapacity),
+            "METERING_MODE_REQUEST_UNITS" => Some(Self::RequestUnits),
+            _ => None,
         }
     }
 }

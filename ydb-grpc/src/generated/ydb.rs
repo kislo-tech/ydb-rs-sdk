@@ -1,4 +1,5 @@
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Limit {
     #[prost(oneof = "limit::Kind", tags = "1, 2, 3, 4, 5, 6")]
@@ -7,6 +8,7 @@ pub struct Limit {
 /// Nested message and enum types in `Limit`.
 pub mod limit {
     #[derive(serde::Serialize, serde::Deserialize)]
+    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Range {
         #[prost(uint32, tag = "1")]
@@ -15,6 +17,7 @@ pub mod limit {
         pub max: u32,
     }
     #[derive(serde::Serialize, serde::Deserialize)]
+    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Kind {
         #[prost(message, tag = "1")]
@@ -32,6 +35,7 @@ pub mod limit {
     }
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MapKey {
     #[prost(message, optional, tag = "1")]
@@ -40,6 +44,7 @@ pub struct MapKey {
     pub value: ::prost::alloc::string::String,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FeatureFlag {}
 /// Nested message and enum types in `FeatureFlag`.
@@ -73,9 +78,19 @@ pub mod feature_flag {
                 Status::Disabled => "DISABLED",
             }
         }
+        /// Creates an enum from field names used in the ProtoBuf definition.
+        pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+            match value {
+                "STATUS_UNSPECIFIED" => Some(Self::Unspecified),
+                "ENABLED" => Some(Self::Enabled),
+                "DISABLED" => Some(Self::Disabled),
+                _ => None,
+            }
+        }
     }
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CostInfo {
     /// Total amount of request units (RU), consumed by the operation.
@@ -83,6 +98,7 @@ pub struct CostInfo {
     pub consumed_units: f64,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct QuotaExceeded {
     #[prost(bool, tag = "1")]
@@ -90,6 +106,7 @@ pub struct QuotaExceeded {
 }
 /// Specifies a point in database time
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct VirtualTimestamp {
     #[prost(uint64, tag = "1")]
@@ -98,6 +115,7 @@ pub struct VirtualTimestamp {
     pub tx_id: u64,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StatusIds {}
 /// Nested message and enum types in `StatusIds`.
@@ -168,9 +186,37 @@ pub mod status_ids {
                 StatusCode::ExternalError => "EXTERNAL_ERROR",
             }
         }
+        /// Creates an enum from field names used in the ProtoBuf definition.
+        pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+            match value {
+                "STATUS_CODE_UNSPECIFIED" => Some(Self::Unspecified),
+                "SUCCESS" => Some(Self::Success),
+                "BAD_REQUEST" => Some(Self::BadRequest),
+                "UNAUTHORIZED" => Some(Self::Unauthorized),
+                "INTERNAL_ERROR" => Some(Self::InternalError),
+                "ABORTED" => Some(Self::Aborted),
+                "UNAVAILABLE" => Some(Self::Unavailable),
+                "OVERLOADED" => Some(Self::Overloaded),
+                "SCHEME_ERROR" => Some(Self::SchemeError),
+                "GENERIC_ERROR" => Some(Self::GenericError),
+                "TIMEOUT" => Some(Self::Timeout),
+                "BAD_SESSION" => Some(Self::BadSession),
+                "PRECONDITION_FAILED" => Some(Self::PreconditionFailed),
+                "ALREADY_EXISTS" => Some(Self::AlreadyExists),
+                "NOT_FOUND" => Some(Self::NotFound),
+                "SESSION_EXPIRED" => Some(Self::SessionExpired),
+                "CANCELLED" => Some(Self::Cancelled),
+                "UNDETERMINED" => Some(Self::Undetermined),
+                "UNSUPPORTED" => Some(Self::Unsupported),
+                "SESSION_BUSY" => Some(Self::SessionBusy),
+                "EXTERNAL_ERROR" => Some(Self::ExternalError),
+                _ => None,
+            }
+        }
     }
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DecimalType {
     #[prost(uint32, tag = "1")]
@@ -179,18 +225,21 @@ pub struct DecimalType {
     pub scale: u32,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct OptionalType {
     #[prost(message, optional, boxed, tag = "1")]
     pub item: ::core::option::Option<::prost::alloc::boxed::Box<Type>>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListType {
     #[prost(message, optional, boxed, tag = "1")]
     pub item: ::core::option::Option<::prost::alloc::boxed::Box<Type>>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct VariantType {
     #[prost(oneof = "variant_type::Type", tags = "1, 2")]
@@ -199,6 +248,7 @@ pub struct VariantType {
 /// Nested message and enum types in `VariantType`.
 pub mod variant_type {
     #[derive(serde::Serialize, serde::Deserialize)]
+    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Type {
         #[prost(message, tag = "1")]
@@ -208,12 +258,14 @@ pub mod variant_type {
     }
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TupleType {
     #[prost(message, repeated, tag = "1")]
     pub elements: ::prost::alloc::vec::Vec<Type>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StructMember {
     #[prost(string, tag = "1")]
@@ -222,12 +274,14 @@ pub struct StructMember {
     pub r#type: ::core::option::Option<Type>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StructType {
     #[prost(message, repeated, tag = "1")]
     pub members: ::prost::alloc::vec::Vec<StructMember>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DictType {
     #[prost(message, optional, boxed, tag = "1")]
@@ -236,6 +290,7 @@ pub struct DictType {
     pub payload: ::core::option::Option<::prost::alloc::boxed::Box<Type>>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TaggedType {
     #[prost(string, tag = "1")]
@@ -244,6 +299,7 @@ pub struct TaggedType {
     pub r#type: ::core::option::Option<::prost::alloc::boxed::Box<Type>>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PgType {
     #[prost(string, tag = "10")]
@@ -261,6 +317,7 @@ pub struct PgType {
     pub typmod: i32,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Type {
     #[prost(
@@ -304,6 +361,10 @@ pub mod r#type {
         TzDate = 52,
         TzDatetime = 53,
         TzTimestamp = 54,
+        Date32 = 64,
+        Datetime64 = 65,
+        Timestamp64 = 66,
+        Interval64 = 67,
         String = 4097,
         Utf8 = 4608,
         Yson = 4609,
@@ -337,6 +398,10 @@ pub mod r#type {
                 PrimitiveTypeId::TzDate => "TZ_DATE",
                 PrimitiveTypeId::TzDatetime => "TZ_DATETIME",
                 PrimitiveTypeId::TzTimestamp => "TZ_TIMESTAMP",
+                PrimitiveTypeId::Date32 => "DATE32",
+                PrimitiveTypeId::Datetime64 => "DATETIME64",
+                PrimitiveTypeId::Timestamp64 => "TIMESTAMP64",
+                PrimitiveTypeId::Interval64 => "INTERVAL64",
                 PrimitiveTypeId::String => "STRING",
                 PrimitiveTypeId::Utf8 => "UTF8",
                 PrimitiveTypeId::Yson => "YSON",
@@ -346,16 +411,53 @@ pub mod r#type {
                 PrimitiveTypeId::Dynumber => "DYNUMBER",
             }
         }
+        /// Creates an enum from field names used in the ProtoBuf definition.
+        pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+            match value {
+                "PRIMITIVE_TYPE_ID_UNSPECIFIED" => Some(Self::Unspecified),
+                "BOOL" => Some(Self::Bool),
+                "INT8" => Some(Self::Int8),
+                "UINT8" => Some(Self::Uint8),
+                "INT16" => Some(Self::Int16),
+                "UINT16" => Some(Self::Uint16),
+                "INT32" => Some(Self::Int32),
+                "UINT32" => Some(Self::Uint32),
+                "INT64" => Some(Self::Int64),
+                "UINT64" => Some(Self::Uint64),
+                "FLOAT" => Some(Self::Float),
+                "DOUBLE" => Some(Self::Double),
+                "DATE" => Some(Self::Date),
+                "DATETIME" => Some(Self::Datetime),
+                "TIMESTAMP" => Some(Self::Timestamp),
+                "INTERVAL" => Some(Self::Interval),
+                "TZ_DATE" => Some(Self::TzDate),
+                "TZ_DATETIME" => Some(Self::TzDatetime),
+                "TZ_TIMESTAMP" => Some(Self::TzTimestamp),
+                "DATE32" => Some(Self::Date32),
+                "DATETIME64" => Some(Self::Datetime64),
+                "TIMESTAMP64" => Some(Self::Timestamp64),
+                "INTERVAL64" => Some(Self::Interval64),
+                "STRING" => Some(Self::String),
+                "UTF8" => Some(Self::Utf8),
+                "YSON" => Some(Self::Yson),
+                "JSON" => Some(Self::Json),
+                "UUID" => Some(Self::Uuid),
+                "JSON_DOCUMENT" => Some(Self::JsonDocument),
+                "DYNUMBER" => Some(Self::Dynumber),
+                _ => None,
+            }
+        }
     }
     #[derive(serde::Serialize, serde::Deserialize)]
+    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Type {
-        /// Data types 
+        /// Data types
         #[prost(enumeration = "PrimitiveTypeId", tag = "1")]
         TypeId(i32),
         #[prost(message, tag = "2")]
         DecimalType(super::DecimalType),
-        /// Container types 
+        /// Container types
         #[prost(message, tag = "101")]
         OptionalType(::prost::alloc::boxed::Box<super::OptionalType>),
         #[prost(message, tag = "102")]
@@ -370,7 +472,7 @@ pub mod r#type {
         VariantType(super::VariantType),
         #[prost(message, tag = "107")]
         TaggedType(::prost::alloc::boxed::Box<super::TaggedType>),
-        /// Special types 
+        /// Special types
         #[prost(enumeration = "super::super::google::protobuf::NullValue", tag = "201")]
         VoidType(i32),
         #[prost(enumeration = "super::super::google::protobuf::NullValue", tag = "202")]
@@ -384,6 +486,7 @@ pub mod r#type {
     }
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ValuePair {
     #[prost(message, optional, tag = "1")]
@@ -392,6 +495,7 @@ pub struct ValuePair {
     pub payload: ::core::option::Option<Value>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Value {
     /// Used for List, Tuple, Struct types
@@ -411,6 +515,7 @@ pub struct Value {
 /// Nested message and enum types in `Value`.
 pub mod value {
     #[derive(serde::Serialize, serde::Deserialize)]
+    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Value {
         #[prost(bool, tag = "1")]
@@ -442,6 +547,7 @@ pub mod value {
     }
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TypedValue {
     #[prost(message, optional, tag = "1")]
@@ -450,6 +556,7 @@ pub struct TypedValue {
     pub value: ::core::option::Option<Value>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Column {
     /// Name of column
@@ -461,6 +568,7 @@ pub struct Column {
 }
 /// Represents table-like structure with ordered set of rows and columns
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ResultSet {
     /// Metadata of columns

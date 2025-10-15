@@ -1,6 +1,7 @@
 /// Create directory.
 /// All intermediate directories must be created
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MakeDirectoryRequest {
     #[prost(message, optional, tag = "1")]
@@ -9,6 +10,7 @@ pub struct MakeDirectoryRequest {
     pub path: ::prost::alloc::string::String,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MakeDirectoryResponse {
     #[prost(message, optional, tag = "1")]
@@ -16,6 +18,7 @@ pub struct MakeDirectoryResponse {
 }
 /// Remove directory
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RemoveDirectoryRequest {
     #[prost(message, optional, tag = "1")]
@@ -24,6 +27,7 @@ pub struct RemoveDirectoryRequest {
     pub path: ::prost::alloc::string::String,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RemoveDirectoryResponse {
     #[prost(message, optional, tag = "1")]
@@ -31,6 +35,7 @@ pub struct RemoveDirectoryResponse {
 }
 /// List directory
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListDirectoryRequest {
     #[prost(message, optional, tag = "1")]
@@ -39,6 +44,7 @@ pub struct ListDirectoryRequest {
     pub path: ::prost::alloc::string::String,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListDirectoryResponse {
     /// Holds ListDirectoryResult in case of successful call
@@ -46,6 +52,7 @@ pub struct ListDirectoryResponse {
     pub operation: ::core::option::Option<super::operations::Operation>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Permissions {
     /// SID (Security ID) of user or group
@@ -55,6 +62,7 @@ pub struct Permissions {
     pub permission_names: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Entry {
     /// Name of scheme entry (dir2 of /dir1/dir2)
@@ -136,9 +144,32 @@ pub mod entry {
                 Type::View => "VIEW",
             }
         }
+        /// Creates an enum from field names used in the ProtoBuf definition.
+        pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+            match value {
+                "TYPE_UNSPECIFIED" => Some(Self::Unspecified),
+                "DIRECTORY" => Some(Self::Directory),
+                "TABLE" => Some(Self::Table),
+                "PERS_QUEUE_GROUP" => Some(Self::PersQueueGroup),
+                "DATABASE" => Some(Self::Database),
+                "RTMR_VOLUME" => Some(Self::RtmrVolume),
+                "BLOCK_STORE_VOLUME" => Some(Self::BlockStoreVolume),
+                "COORDINATION_NODE" => Some(Self::CoordinationNode),
+                "COLUMN_STORE" => Some(Self::ColumnStore),
+                "COLUMN_TABLE" => Some(Self::ColumnTable),
+                "SEQUENCE" => Some(Self::Sequence),
+                "REPLICATION" => Some(Self::Replication),
+                "TOPIC" => Some(Self::Topic),
+                "EXTERNAL_TABLE" => Some(Self::ExternalTable),
+                "EXTERNAL_DATA_SOURCE" => Some(Self::ExternalDataSource),
+                "VIEW" => Some(Self::View),
+                _ => None,
+            }
+        }
     }
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListDirectoryResult {
     #[prost(message, optional, tag = "1")]
@@ -148,6 +179,7 @@ pub struct ListDirectoryResult {
 }
 /// Returns information about object with given path
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DescribePathRequest {
     #[prost(message, optional, tag = "1")]
@@ -156,6 +188,7 @@ pub struct DescribePathRequest {
     pub path: ::prost::alloc::string::String,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DescribePathResponse {
     /// Holds DescribePathResult in case of DescribePathResult
@@ -163,12 +196,14 @@ pub struct DescribePathResponse {
     pub operation: ::core::option::Option<super::operations::Operation>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DescribePathResult {
     #[prost(message, optional, tag = "1")]
     pub self_: ::core::option::Option<Entry>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PermissionsAction {
     #[prost(oneof = "permissions_action::Action", tags = "1, 2, 3, 4")]
@@ -177,6 +212,7 @@ pub struct PermissionsAction {
 /// Nested message and enum types in `PermissionsAction`.
 pub mod permissions_action {
     #[derive(serde::Serialize, serde::Deserialize)]
+    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Action {
         /// Grant permissions
@@ -195,6 +231,7 @@ pub mod permissions_action {
 }
 /// Modify permissions of given object
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ModifyPermissionsRequest {
     #[prost(message, optional, tag = "1")]
@@ -212,6 +249,7 @@ pub struct ModifyPermissionsRequest {
 /// Nested message and enum types in `ModifyPermissionsRequest`.
 pub mod modify_permissions_request {
     #[derive(serde::Serialize, serde::Deserialize)]
+    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Inheritance {
         #[prost(bool, tag = "5")]
@@ -219,6 +257,7 @@ pub mod modify_permissions_request {
     }
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ModifyPermissionsResponse {
     #[prost(message, optional, tag = "1")]

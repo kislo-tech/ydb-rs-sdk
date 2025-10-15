@@ -1,5 +1,6 @@
 /// IssueMessage is a transport format for ydb/library/yql/public/issue library
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct IssueMessage {
     #[prost(message, optional, tag = "1")]
@@ -23,6 +24,7 @@ pub struct IssueMessage {
 /// Nested message and enum types in `IssueMessage`.
 pub mod issue_message {
     #[derive(serde::Serialize, serde::Deserialize)]
+    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Message)]
     pub struct Position {
         #[prost(uint32, tag = "1")]

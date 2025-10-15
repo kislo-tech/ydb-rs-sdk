@@ -70,9 +70,9 @@ pub mod discovery_service_client {
             &mut self,
             request: impl tonic::IntoRequest<super::super::ListEndpointsRequest>,
         ) -> Result<
-                tonic::Response<super::super::ListEndpointsResponse>,
-                tonic::Status,
-            > {
+            tonic::Response<super::super::ListEndpointsResponse>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await
