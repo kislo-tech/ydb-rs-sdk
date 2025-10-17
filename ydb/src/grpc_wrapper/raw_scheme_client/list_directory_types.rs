@@ -69,24 +69,27 @@ pub(crate) fn from_grpc_to_scheme_entry(value: ydb_grpc::ydb_proto::scheme::Entr
 
 fn from_grpc_code_to_scheme_entry_type(value: i32) -> SchemeEntryType {
     use ydb_grpc::ydb_proto::scheme::entry::Type as grpcT;
-    match grpcT::from_i32(value) {
-        Some(grpcT::Unspecified) => SchemeEntryType::Unspecified,
-        Some(grpcT::Directory) => SchemeEntryType::Directory,
-        Some(grpcT::Table) => SchemeEntryType::Table,
-        Some(grpcT::ColumnStore) => SchemeEntryType::ColumnStrore,
-        Some(grpcT::ColumnTable) => SchemeEntryType::ColumnTable,
-        Some(grpcT::PersQueueGroup) => SchemeEntryType::PersQueueGroup,
-        Some(grpcT::Database) => SchemeEntryType::Database,
-        Some(grpcT::RtmrVolume) => SchemeEntryType::RtmrVolume,
-        Some(grpcT::BlockStoreVolume) => SchemeEntryType::BlockStoreVolume,
-        Some(grpcT::CoordinationNode) => SchemeEntryType::CoordinationNode,
-        Some(grpcT::Sequence) => SchemeEntryType::Sequence,
-        Some(grpcT::Replication) => SchemeEntryType::Replication,
-        Some(grpcT::Topic) => SchemeEntryType::Topic,
-        Some(grpcT::ExternalDataSource) => SchemeEntryType::ExternalDataSource,
-        Some(grpcT::ExternalTable) => SchemeEntryType::ExternalTable,
-        Some(grpcT::View) => SchemeEntryType::View,
-        None => SchemeEntryType::Unknown(value),
+    let Ok(grpc_t) = grpcT::try_from(value) else {
+        return SchemeEntryType::Unknown(value);
+    };
+
+    match grpc_t {
+        grpcT::Unspecified => SchemeEntryType::Unspecified,
+        grpcT::Directory => SchemeEntryType::Directory,
+        grpcT::Table => SchemeEntryType::Table,
+        grpcT::ColumnStore => SchemeEntryType::ColumnStrore,
+        grpcT::ColumnTable => SchemeEntryType::ColumnTable,
+        grpcT::PersQueueGroup => SchemeEntryType::PersQueueGroup,
+        grpcT::Database => SchemeEntryType::Database,
+        grpcT::RtmrVolume => SchemeEntryType::RtmrVolume,
+        grpcT::BlockStoreVolume => SchemeEntryType::BlockStoreVolume,
+        grpcT::CoordinationNode => SchemeEntryType::CoordinationNode,
+        grpcT::Sequence => SchemeEntryType::Sequence,
+        grpcT::Replication => SchemeEntryType::Replication,
+        grpcT::Topic => SchemeEntryType::Topic,
+        grpcT::ExternalDataSource => SchemeEntryType::ExternalDataSource,
+        grpcT::ExternalTable => SchemeEntryType::ExternalTable,
+        grpcT::View => SchemeEntryType::View,
     }
 }
 

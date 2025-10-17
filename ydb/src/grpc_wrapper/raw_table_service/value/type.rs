@@ -91,14 +91,8 @@ pub(crate) struct TaggedType {
 
 impl RawType {
     fn try_from_primitive_type_id(int_type_id: i32) -> RawResult<Self> {
-        let type_id = PrimitiveTypeId::from_i32(int_type_id);
-        let type_id = if let Some(type_id) = type_id {
-            type_id
-        } else {
-            return Err(RawError::decode_error(format!(
-                "Unexpected primitive type_id: {int_type_id}"
-            )));
-        };
+        let type_id = PrimitiveTypeId::try_from(int_type_id)
+            .map_err(|e| RawError::decode_error(format!("Unexpected primitive type_id: {e}")))?;
 
         let res = match type_id {
             PrimitiveTypeId::Unspecified => {

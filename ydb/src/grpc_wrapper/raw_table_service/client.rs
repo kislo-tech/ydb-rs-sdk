@@ -141,11 +141,14 @@ impl From<i32> for SessionStatus {
     fn from(value: i32) -> Self {
         use ydb_grpc::ydb_proto::table::keep_alive_result;
 
-        match keep_alive_result::SessionStatus::from_i32(value) {
-            Some(keep_alive_result::SessionStatus::Ready) => SessionStatus::Ready,
-            Some(keep_alive_result::SessionStatus::Busy) => SessionStatus::Busy,
-            Some(keep_alive_result::SessionStatus::Unspecified) => SessionStatus::Unspecified,
-            None => SessionStatus::Unknown(value),
+        let Ok(session_status) = keep_alive_result::SessionStatus::try_from(value) else {
+            return SessionStatus::Unknown(value);
+        };
+
+        match session_status {
+            keep_alive_result::SessionStatus::Ready => SessionStatus::Ready,
+            keep_alive_result::SessionStatus::Busy => SessionStatus::Busy,
+            keep_alive_result::SessionStatus::Unspecified => SessionStatus::Unspecified,
         }
     }
 }

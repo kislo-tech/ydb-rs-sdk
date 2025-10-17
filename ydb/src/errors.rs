@@ -165,9 +165,8 @@ impl YdbStatusError {
     /// # }
     /// ```
     pub fn operation_status(&self) -> YdbResult<StatusCode> {
-        StatusCode::from_i32(self.operation_status).ok_or_else(|| {
-            YdbError::InternalError(format!("unknown status code: {}", self.operation_status))
-        })
+        StatusCode::try_from(self.operation_status)
+            .map_err(|e| YdbError::InternalError(format!("unknown status code: {e}")))
     }
 }
 
@@ -262,18 +261,18 @@ impl YdbError {
                 }
             }
             Self::YdbStatusError(ydb_err) => {
-                if let Some(status) = StatusCode::from_i32(ydb_err.operation_status) {
-                    match status {
-                        StatusCode::Aborted
-                        | StatusCode::Unavailable
-                        | StatusCode::Overloaded
-                        | StatusCode::BadSession
-                        | StatusCode::SessionBusy => NeedRetry::True,
-                        StatusCode::Undetermined => NeedRetry::IdempotentOnly,
-                        _ => NeedRetry::False,
-                    }
-                } else {
-                    NeedRetry::False
+                let Ok(status) = StatusCode::try_from(ydb_err.operation_status) else {
+                    return NeedRetry::False;
+                };
+
+                match status {
+                    StatusCode::Aborted
+                    | StatusCode::Unavailable
+                    | StatusCode::Overloaded
+                    | StatusCode::BadSession
+                    | StatusCode::SessionBusy => NeedRetry::True,
+                    StatusCode::Undetermined => NeedRetry::IdempotentOnly,
+                    _ => NeedRetry::False,
                 }
             }
         }

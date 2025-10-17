@@ -15,12 +15,16 @@ prost-types = { workspace = true }
 pbjson = { workspace = true }
 pbjson-types = { workspace = true }
 serde = { workspace = true }
-tonic = { workspace = true, features = [ "tls-roots", "tls-webpki-roots" ] }
+tonic = { workspace = true, features = [
+    "tls-native-roots",
+    "tls-webpki-roots",
+] }
+tonic-prost = { workspace = true }
 
 [build-dependencies]
 prost-build = { workspace = true }
 pbjson-build = { workspace = true }
-tonic-build = "0.8.0"
+tonic-prost-build = { workspace = true }
 walkdir = "2"
 
 [features]
