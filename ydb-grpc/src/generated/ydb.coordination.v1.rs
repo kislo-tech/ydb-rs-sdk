@@ -66,7 +66,7 @@ pub mod coordination_service_client {
             self.inner = self.inner.accept_compressed(encoding);
             self
         }
-        ///*
+        /// *
         /// Bidirectional stream used to establish a session with a coordination node
         /// Relevant APIs for managing semaphores, distributed locking, creating or
         /// restoring a previously established session are described using nested
@@ -79,9 +79,9 @@ pub mod coordination_service_client {
                 Message = super::super::SessionRequest,
             >,
         ) -> Result<
-                tonic::Response<tonic::codec::Streaming<super::super::SessionResponse>>,
-                tonic::Status,
-            > {
+            tonic::Response<tonic::codec::Streaming<super::super::SessionResponse>>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await

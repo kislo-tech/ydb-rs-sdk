@@ -7,3 +7,24 @@ members = [
     "ydb-example-urlshortener",
     "ydb-slo-tests",
 ]
+
+[workspace.package]
+rust-version = "1.82"
+
+[workspace.dependencies]
+# Versions of those crates should match, that's why all of them are here.
+prost = "0.14.1"
+prost-types = "0.14.1"
+prost-build = "0.14.1"
+
+# Versions of those crates should match, that's why all of them are here.
+pbjson = "0.8.0"
+pbjson-types = "0.8.0"
+pbjson-build = "0.8.0"
+
+# Versions of those crates should match, that's why all of them are here.
+tonic = { version = "0.14.2", features = [ "tls-ring" ] }
+tonic-prost = "0.14.2"
+tonic-prost-build = "0.14.2"
+
+serde = { version = "1.0", features = ["derive"] }

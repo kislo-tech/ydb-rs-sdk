@@ -1,4 +1,5 @@
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListEndpointsRequest {
     #[prost(string, tag = "1")]
@@ -7,6 +8,7 @@ pub struct ListEndpointsRequest {
     pub service: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EndpointInfo {
     /// This is an address (usually fqdn) and port of this node's grpc endpoint
@@ -38,6 +40,7 @@ pub struct EndpointInfo {
     pub ssl_target_name_override: ::prost::alloc::string::String,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListEndpointsResult {
     #[prost(message, repeated, tag = "1")]
@@ -46,12 +49,14 @@ pub struct ListEndpointsResult {
     pub self_location: ::prost::alloc::string::String,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListEndpointsResponse {
     #[prost(message, optional, tag = "1")]
     pub operation: ::core::option::Option<super::operations::Operation>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct WhoAmIRequest {
     /// Include user groups in response
@@ -59,6 +64,7 @@ pub struct WhoAmIRequest {
     pub include_groups: bool,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct WhoAmIResult {
     /// User SID (Security ID)
@@ -69,12 +75,14 @@ pub struct WhoAmIResult {
     pub groups: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct WhoAmIResponse {
     #[prost(message, optional, tag = "1")]
     pub operation: ::core::option::Option<super::operations::Operation>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NodeLocation {
     /// compatibility section -- will be removed in future versions

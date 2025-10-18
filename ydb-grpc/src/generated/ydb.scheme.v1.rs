@@ -71,9 +71,9 @@ pub mod scheme_service_client {
             &mut self,
             request: impl tonic::IntoRequest<super::super::MakeDirectoryRequest>,
         ) -> Result<
-                tonic::Response<super::super::MakeDirectoryResponse>,
-                tonic::Status,
-            > {
+            tonic::Response<super::super::MakeDirectoryResponse>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await
@@ -94,9 +94,9 @@ pub mod scheme_service_client {
             &mut self,
             request: impl tonic::IntoRequest<super::super::RemoveDirectoryRequest>,
         ) -> Result<
-                tonic::Response<super::super::RemoveDirectoryResponse>,
-                tonic::Status,
-            > {
+            tonic::Response<super::super::RemoveDirectoryResponse>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await
@@ -117,9 +117,9 @@ pub mod scheme_service_client {
             &mut self,
             request: impl tonic::IntoRequest<super::super::ListDirectoryRequest>,
         ) -> Result<
-                tonic::Response<super::super::ListDirectoryResponse>,
-                tonic::Status,
-            > {
+            tonic::Response<super::super::ListDirectoryResponse>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await
@@ -160,9 +160,9 @@ pub mod scheme_service_client {
             &mut self,
             request: impl tonic::IntoRequest<super::super::ModifyPermissionsRequest>,
         ) -> Result<
-                tonic::Response<super::super::ModifyPermissionsResponse>,
-                tonic::Status,
-            > {
+            tonic::Response<super::super::ModifyPermissionsResponse>,
+            tonic::Status,
+        > {
             self.inner
                 .ready()
                 .await

@@ -33,7 +33,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         // .extern_path(".google.protobuf", "::pbjson_types")
         .file_descriptor_set_path(&descriptor_file);
 
-    tonic_build::configure()
+    tonic_prost_build::configure()
         .build_server(false)
         .build_client(true)
         .out_dir(DST_FOLDER)

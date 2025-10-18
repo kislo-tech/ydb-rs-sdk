@@ -1,4 +1,5 @@
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct OperationParams {
     #[prost(enumeration = "operation_params::OperationMode", tag = "1")]
@@ -64,27 +65,40 @@ pub mod operation_params {
                 OperationMode::Async => "ASYNC",
             }
         }
+        /// Creates an enum from field names used in the ProtoBuf definition.
+        pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+            match value {
+                "OPERATION_MODE_UNSPECIFIED" => Some(Self::Unspecified),
+                "SYNC" => Some(Self::Sync),
+                "ASYNC" => Some(Self::Async),
+                _ => None,
+            }
+        }
     }
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetOperationRequest {
     #[prost(string, tag = "1")]
     pub id: ::prost::alloc::string::String,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetOperationResponse {
     #[prost(message, optional, tag = "1")]
     pub operation: ::core::option::Option<Operation>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CancelOperationRequest {
     #[prost(string, tag = "1")]
     pub id: ::prost::alloc::string::String,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CancelOperationResponse {
     #[prost(enumeration = "super::status_ids::StatusCode", tag = "1")]
@@ -93,12 +107,14 @@ pub struct CancelOperationResponse {
     pub issues: ::prost::alloc::vec::Vec<super::issue::IssueMessage>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ForgetOperationRequest {
     #[prost(string, tag = "1")]
     pub id: ::prost::alloc::string::String,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ForgetOperationResponse {
     #[prost(enumeration = "super::status_ids::StatusCode", tag = "1")]
@@ -107,6 +123,7 @@ pub struct ForgetOperationResponse {
     pub issues: ::prost::alloc::vec::Vec<super::issue::IssueMessage>,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListOperationsRequest {
     #[prost(string, tag = "1")]
@@ -117,6 +134,7 @@ pub struct ListOperationsRequest {
     pub page_token: ::prost::alloc::string::String,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ListOperationsResponse {
     #[prost(enumeration = "super::status_ids::StatusCode", tag = "1")]
@@ -129,6 +147,7 @@ pub struct ListOperationsResponse {
     pub next_page_token: ::prost::alloc::string::String,
 }
 #[derive(serde::Serialize, serde::Deserialize)]
+#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Operation {
     /// Identifier of the operation, empty value means no active operation object is present (it was forgotten or
