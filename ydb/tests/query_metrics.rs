@@ -3,7 +3,6 @@
 //! These tests are separated from `query_tx.rs` because they
 //! share the global `prometheus::default_registry()` and would
 //! interfere with parallel runs within the same test binary.
-#![recursion_limit = "256"]
 
 mod mock_server;
 

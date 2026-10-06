@@ -2,7 +2,8 @@ use std::collections::HashMap;
 use std::future::Future;
 use std::time::{Duration, Instant};
 
-use futures_util::TryFutureExt;
+use futures_util::future::BoxFuture;
+use futures_util::{FutureExt, TryFutureExt};
 use tokio::time::timeout;
 
 use crate::client_metrics::names::MetricsNames;
@@ -516,8 +517,18 @@ async fn client_implicit_session_request(
     Ok((client, req))
 }
 
+pub(super) fn client_begin_stream_once<'a>(
+    ctx: &'a ClientExecContext,
+    text: &'a str,
+    params: &'a HashMap<String, Value>,
+    opts: &'a CallOptions,
+    concurrent_result_sets: bool,
+) -> BoxFuture<'a, YdbResult<OpenedClientQueryStream>> {
+    client_begin_stream_once_inner(ctx, text, params, opts, concurrent_result_sets).boxed()
+}
+
 #[instrument(name = "ydb.Query.BeginStreamOnce", skip_all, fields(db.system.name = "ydb"), err)]
-pub(super) async fn client_begin_stream_once(
+async fn client_begin_stream_once_inner(
     ctx: &ClientExecContext,
     text: &str,
     params: &HashMap<String, Value>,
@@ -527,15 +538,22 @@ pub(super) async fn client_begin_stream_once(
     if opts.implicit_session {
         let (mut client, req) =
             client_implicit_session_request(ctx, text, params, opts, concurrent_result_sets)
+                .boxed()
                 .await?;
-        let stream = client.execute_query(req).await.map_err(YdbError::from)?;
+        let stream = client
+            .execute_query(req)
+            .boxed()
+            .await
+            .map_err(YdbError::from)?;
         return Ok(OpenedClientQueryStream {
             stream: ExecuteQueryStream::new(stream),
             session: ClientQuerySession::ServerImplicit,
         });
     }
 
-    open_pooled_query_stream(ctx, text, params, opts, concurrent_result_sets).await
+    open_pooled_query_stream(ctx, text, params, opts, concurrent_result_sets)
+        .boxed()
+        .await
 }
 
 async fn open_pooled_query_stream(
@@ -546,12 +564,13 @@ async fn open_pooled_query_stream(
     concurrent_result_sets: bool,
 ) -> YdbResult<OpenedClientQueryStream> {
     let tx_control = tx_control_for_client(opts)?;
-    let lease = ctx.session_pool.acquire_explicit().await?;
+    let lease = ctx.session_pool.acquire_explicit().boxed().await?;
     let result = async {
         lease.ensure_healthy()?;
         let mut client = ctx
             .connection_manager
             .get_auth_service_to_node(RawQueryClient::new, lease.node_uri())
+            .boxed()
             .await?;
         let mut req = RawExecuteQueryRequest::new(
             lease.session_id(),
@@ -561,9 +580,14 @@ async fn open_pooled_query_stream(
             opts.collect_stats,
         )?;
         req.concurrent_result_sets = concurrent_result_sets;
-        let stream = client.execute_query(req).await.map_err(YdbError::from)?;
+        let stream = client
+            .execute_query(req)
+            .boxed()
+            .await
+            .map_err(YdbError::from)?;
         Ok(ExecuteQueryStream::new(stream))
     }
+    .boxed()
     .await;
 
     match result {
@@ -575,8 +599,19 @@ async fn open_pooled_query_stream(
     }
 }
 
+/// Boxed so a generic `CallBuilder` future does not embed this state machine.
+pub(crate) fn client_begin_stream<'a>(
+    ctx: &'a ClientExecContext,
+    text: String,
+    params: HashMap<String, Value>,
+    opts: CallOptions,
+    concurrent_result_sets: bool,
+) -> BoxFuture<'a, YdbResult<OpenedClientQueryStream>> {
+    client_begin_stream_inner(ctx, text, params, opts, concurrent_result_sets).boxed()
+}
+
 #[instrument(name = "ydb.Query.BeginStream", skip_all, fields(db.system.name = "ydb", ydb.Query.text = %ensure_len_string(&text), ydb.Query.params = ?params, ydb.Query.opts = ?opts), err)]
-pub(crate) async fn client_begin_stream(
+async fn client_begin_stream_inner(
     ctx: &ClientExecContext,
     text: String,
     params: HashMap<String, Value>,
@@ -596,6 +631,7 @@ pub(crate) async fn client_begin_stream(
                 concurrent_result_sets
             )),
         )
+        .boxed()
         .await
 }
 
@@ -743,8 +779,19 @@ fn tx_execute_request(
     Ok(request)
 }
 
+/// Boxed so a generic `CallBuilder` future does not embed this state machine.
+pub(crate) fn tx_begin_stream<'a>(
+    tx: &'a mut TxExecContext,
+    text: String,
+    params: HashMap<String, Value>,
+    opts: CallOptions,
+    concurrent_result_sets: bool,
+) -> BoxFuture<'a, YdbResult<ExecuteQueryStream>> {
+    tx_begin_stream_inner(tx, text, params, opts, concurrent_result_sets).boxed()
+}
+
 #[instrument(name = "ydb.Query.TransactionBeginStream", skip_all, fields(db.system.name = "ydb", ydb.tx.mode = ?tx.tx_mode, ydb.session.id = tracing::field::Empty), err)]
-pub(crate) async fn tx_begin_stream(
+async fn tx_begin_stream_inner(
     tx: &mut TxExecContext,
     text: String,
     params: HashMap<String, Value>,
@@ -757,14 +804,14 @@ pub(crate) async fn tx_begin_stream(
     );
     tx.active()?;
     let operation_timeout = resolve_operation_timeout(tx.retry_deadline, opts.timeout);
-    let result: YdbResult<ExecuteQueryStream> = with_optional_timeout(operation_timeout, async {
+    let operation = async {
         tx.session_lease()?.ensure_healthy()?;
         tracing::Span::current().record("ydb.session.id", tx.session_lease()?.session_id());
         if tx.begin {
-            tx_ensure_begin(tx).await?;
+            tx_ensure_begin(tx).boxed().await?;
         }
         if opts.commit_tx.unwrap_or(false) {
-            tx_before_commit(tx).await?;
+            tx_before_commit(tx).boxed().await?;
         }
         let request = tx_execute_request(tx, text, params, &opts, concurrent_result_sets)?;
         let progress = &mut tx.active_mut()?.server_progress;
@@ -774,10 +821,11 @@ pub(crate) async fn tx_begin_stream(
             .active_mut()?
             .client
             .execute_query(request)
+            .boxed()
             .await
             .map_err(YdbError::from)?;
         let mut stream = ExecuteQueryStream::new(stream);
-        stream.prime_first_part().await?;
+        stream.prime_first_part().boxed().await?;
         if !stream.in_progress() {
             let error = YdbError::InternalError(
                 "ExecuteQuery response stream closed before the first part".to_string(),
@@ -787,8 +835,10 @@ pub(crate) async fn tx_begin_stream(
         let tx_id = stream.take_captured_tx_id();
         apply_stream_tx_id(tx, tx_id)?;
         Ok(stream)
-    })
-    .await;
+    }
+    .boxed();
+    let result: YdbResult<ExecuteQueryStream> =
+        with_optional_timeout(operation_timeout, operation).await;
     if let Err(err) = &result
         && tx.state.is_active()
     {

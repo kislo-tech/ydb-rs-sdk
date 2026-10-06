@@ -1,6 +1,9 @@
 use std::collections::HashMap;
 use std::time::Duration;
 
+use futures_util::FutureExt;
+use futures_util::future::BoxFuture;
+
 use crate::closure;
 use crate::errors::{YdbError, YdbResult};
 use crate::grpc_wrapper::raw_query_service::stream::ExecuteQueryStream;
@@ -178,93 +181,108 @@ impl<'a> QueryStream<'a> {
 ///
 /// On [`QueryClient`], the full open+drain+close cycle is retried on retryable errors.
 /// Interactive transactions are materialized once since tx retries are owned by [`QueryClient::retry_tx`] loop.
-pub(crate) async fn materialize_query(
-    core: &mut ExecTarget<'_>,
+///
+/// Boxed so a generic [`CallBuilder`](super::builders::CallBuilder) future does not embed this
+/// state machine. Downstream crates otherwise monomorphize its layout and overflow the recursion limit.
+pub(crate) fn materialize_query<'a>(
+    core: &'a mut ExecTarget<'_>,
     text: String,
     params: HashMap<String, Value>,
     opts: CallOptions,
-) -> YdbResult<Vec<ResultSet>> {
-    let commit_at_end = resolve_commit_tx(core, &opts);
-    match core {
-        ExecTarget::Client(ctx) => {
-            ctx.retry_settings
-                .clone()
-                .with_deadline(opts.timeout)
-                .retry_on_retriable_errors(
-                    opts.idempotency(),
-                    closure!([&ctx, &text, &params, &opts], |_| {
-                        materialize_client_once(ctx, text, params, opts)
-                    }),
-                )
-                .await
-        }
-        ExecTarget::Tx(context) => {
-            materialize_tx_once(context, text, params, opts, commit_at_end).await
+) -> BoxFuture<'a, YdbResult<Vec<ResultSet>>> {
+    async move {
+        let commit_at_end = resolve_commit_tx(core, &opts);
+        match core {
+            ExecTarget::Client(ctx) => {
+                ctx.retry_settings
+                    .clone()
+                    .with_deadline(opts.timeout)
+                    .retry_on_retriable_errors(
+                        opts.idempotency(),
+                        closure!([&ctx, &text, &params, &opts], |_| {
+                            materialize_client_once(ctx, text, params, opts)
+                        }),
+                    )
+                    .boxed()
+                    .await
+            }
+            ExecTarget::Tx(context) => {
+                materialize_tx_once(context, text, params, opts, commit_at_end).await
+            }
         }
     }
+    .boxed()
 }
 
-async fn materialize_client_once(
-    ctx: &ClientExecContext,
-    text: &str,
-    params: &HashMap<String, Value>,
-    opts: &CallOptions,
-) -> YdbResult<Vec<ResultSet>> {
-    let mut opened = client_begin_stream_once(ctx, text, params, opts, true).await?;
-    let result: YdbResult<Vec<RawResultSet>> = async {
-        let raw_sets = drain_result_sets(&mut opened.stream).await?;
-        opened.stream.close().await?;
-        Ok(raw_sets)
-    }
-    .await;
-    match result {
-        Ok(raw_sets) => {
-            opened.session.release();
-            convert_result_sets(raw_sets)
+fn materialize_client_once<'a>(
+    ctx: &'a ClientExecContext,
+    text: &'a str,
+    params: &'a HashMap<String, Value>,
+    opts: &'a CallOptions,
+) -> BoxFuture<'a, YdbResult<Vec<ResultSet>>> {
+    async move {
+        let mut opened = client_begin_stream_once(ctx, text, params, opts, true).await?;
+        let result: YdbResult<Vec<RawResultSet>> = async {
+            let raw_sets = drain_result_sets(&mut opened.stream).boxed().await?;
+            opened.stream.close().boxed().await?;
+            Ok(raw_sets)
         }
-        Err(error) => Err(error),
+        .boxed()
+        .await;
+        match result {
+            Ok(raw_sets) => {
+                opened.session.release();
+                convert_result_sets(raw_sets)
+            }
+            Err(error) => Err(error),
+        }
     }
+    .boxed()
 }
 
-async fn materialize_tx_once(
-    context: &mut TxExecContext,
+fn materialize_tx_once<'a>(
+    context: &'a mut TxExecContext,
     text: String,
     params: HashMap<String, Value>,
     opts: CallOptions,
     commit_at_end: bool,
-) -> YdbResult<Vec<ResultSet>> {
-    let mut stream = tx_begin_stream(context, text, params, opts, true).await?;
-    let raw_sets = match drain_result_sets(&mut stream).await {
-        Ok(raw_sets) => raw_sets,
-        Err(ydb_err) => {
-            tx_handle_query_error(context, &ydb_err)?;
-            return Err(ydb_err);
+) -> BoxFuture<'a, YdbResult<Vec<ResultSet>>> {
+    async move {
+        let mut stream = tx_begin_stream(context, text, params, opts, true).await?;
+        let raw_sets = match drain_result_sets(&mut stream).boxed().await {
+            Ok(raw_sets) => raw_sets,
+            Err(ydb_err) => {
+                tx_handle_query_error(context, &ydb_err)?;
+                return Err(ydb_err);
+            }
+        };
+        let sets = match convert_result_sets(raw_sets) {
+            Ok(sets) => sets,
+            Err(ydb_err) => {
+                tx_handle_query_error(context, &ydb_err)?;
+                return Err(ydb_err);
+            }
+        };
+        match stream.close().boxed().await {
+            Ok(meta) => {
+                apply_stream_tx_id(context, meta.tx_id)?;
+                tx_finish_query(context, commit_at_end)?;
+            }
+            Err(err) => {
+                let ydb_err = YdbError::from(err);
+                tx_handle_query_error(context, &ydb_err)?;
+                return Err(ydb_err);
+            }
         }
-    };
-    let sets = match convert_result_sets(raw_sets) {
-        Ok(sets) => sets,
-        Err(ydb_err) => {
-            tx_handle_query_error(context, &ydb_err)?;
-            return Err(ydb_err);
-        }
-    };
-    match stream.close().await {
-        Ok(meta) => {
-            apply_stream_tx_id(context, meta.tx_id)?;
-            tx_finish_query(context, commit_at_end)?;
-        }
-        Err(err) => {
-            let ydb_err = YdbError::from(err);
-            tx_handle_query_error(context, &ydb_err)?;
-            return Err(ydb_err);
-        }
+        Ok(sets)
     }
-    Ok(sets)
+    .boxed()
 }
 
 async fn drain_result_sets(stream: &mut ExecuteQueryStream) -> YdbResult<Vec<RawResultSet>> {
     stream
         .materialize_all_result_sets()
+        .boxed()
         .await
         .map_err(YdbError::from)
 }
